@@ -6,6 +6,8 @@ import { logout } from '../auth/spotify'
 import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
+
+
 export function ScanDashboard(playlistId : string) {
   const [isPressed, setIsPressed] =  useState(false)
   const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId.playlistId);
@@ -34,7 +36,6 @@ export function ScanDashboard(playlistId : string) {
     return <div>Loading...</div>;
   }
 
-
   return (
     <div>
       <Head>
@@ -47,12 +48,12 @@ export function ScanDashboard(playlistId : string) {
           <>
             <h1 className="text-4xl">Welcome, {user.display_name}</h1>
             <p className="text-xl">Here is nostalgia waiting.</p>
-            {data && <p>{data.description}</p>}
-            <img href></img>
+            {data && <p>{data.name}</p>}
+             <img  style={{display: 'block', height: 300, width: 300,}} src={data && data.images[0].url  } ></img>
             <button onClick={handleFollowClick}>
              {isPressed ? 'Followed' : "Follow"}
+             
           </button>
-    
 
             <button
               className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
