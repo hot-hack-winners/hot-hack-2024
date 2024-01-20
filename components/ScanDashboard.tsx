@@ -16,13 +16,6 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
   const router = useRouter()
   const { user, loggedOut, mutate } = useUser()
   const { topArtists, isLoading, isError } = useTopArtists()
-  useEffect(() => {
-    if (loggedOut) {
-      sessionStorage.setItem('preAuthUrl', window.location.href);
-      const savedUrl =   sessionStorage.getItem('preAuthUrl');
-      mutate(null, false).then(() => router.replace('/'))
-    }
-  }, [loggedOut, mutate])
 
 
 
