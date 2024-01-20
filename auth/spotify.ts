@@ -58,8 +58,10 @@ export async function beginLogin() {
 
   location.href = `https://accounts.spotify.com/authorize?${params}`
 }
-
+let loginrunning = false
 export async function completeLogin() {
+  if (loginrunning) return 
+  loginrunning = true
   const code_verifier = sessionStorage.getItem('code_verifier')
   const state = sessionStorage.getItem('state')
 
@@ -124,7 +126,7 @@ async function createAccessToken(params: Record<string, string>) {
   return accessToken as string;
 }
 
-async function getAccessToken() {
+ export async function getAccessToken() {
   let tokenSet = localStorage.getItem('tokenSet');
 
   if (!tokenSet) return

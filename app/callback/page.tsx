@@ -3,28 +3,22 @@ import { completeLogin } from '../../auth/spotify'
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-
-
+import {getAccessToken} from '@/auth/spotify'
 export default function Page() {
   const router = useRouter()
 
   useEffect(() => {
     completeLogin()
-      .then(() => {
-        const savedUrl = sessionStorage.getItem('preAuthUrl');
-
-        if (savedUrl) {
-          router.push(savedUrl);
-        }
-        else {
-          router.push('/profile');
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-        router.replace('/')
-      })
-    }, [])
+    .then(() => {
+      const savedUrl = sessionStorage.getItem('preAuthUrl');
+      console.log()
+      router.push(savedUrl);
+    })
+    .catch((error) => {
+      console.error(error)
+      router.replace('/')
+    })
+  }, [])
 
   return (
     <div>
