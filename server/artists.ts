@@ -18,6 +18,14 @@ export function getAllArtists() {
     )
 }
 
+export function getArtistByID(artistId: string) {
+    const data = executeQuery<Artist>(
+        'SELECT * FROM artists where uuid = ?;',
+        [artistId]
+    )
+    return data
+}
+
 export function addArtist(artist: Artist) {
     return executeQuery(
         'INSERT INTO artists (uuid, name, spotify_id) VALUES(uuid(), ?, ?)',

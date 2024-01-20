@@ -21,6 +21,14 @@ export function getAllAdmins() {
     )
 }
 
+export function getAdminByID(adminId: string) {
+    const data = executeQuery<Admin>(
+        'SELECT * FROM admins where uuid = ?;',
+        [adminId]
+    )
+    return data
+}
+
 export function registerAdmin(adminUser: Admin) {
     const saltRounds: number = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {

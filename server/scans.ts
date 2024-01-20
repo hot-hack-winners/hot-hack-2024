@@ -20,6 +20,14 @@ export function getAllScans() {
     )
 }
 
+export function getScanByID(scanId: string) {
+    const data = executeQuery<Scan>(
+        'SELECT * FROM scans where uuid = ?;',
+        [scanId]
+    )
+    return data
+}
+
 export function addScan(scan: Scan) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return executeQuery(

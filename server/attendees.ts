@@ -20,6 +20,14 @@ export function getAllAttendees() {
     )
 }
 
+export function getAttendeeByID(attendeeId: string) {
+    const data = executeQuery<Attendee>(
+        'SELECT * FROM attendees where uuid = ?;',
+        [attendeeId]
+    )
+    return data
+}
+
 export function addAttendee(attendee: Attendee) {
     const saltRounds: number = 10;
     return executeQuery(

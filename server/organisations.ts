@@ -18,6 +18,14 @@ export function getAllOrganisations() {
     )
 }
 
+export function getOrganisationByID(organisationId: string) {
+    const data = executeQuery<Organisation>(
+        'SELECT * FROM organisations where uuid = ?;',
+        [organisationId]
+    )
+    return data
+}
+
 export function addOrgnisation(organisation: Organisation) {
 
     return executeQuery(

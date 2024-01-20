@@ -19,6 +19,14 @@ export function getAllVenues() {
     )
 }
 
+export function getVenueByID(venueId: string) {
+    const data = executeQuery<Venue>(
+        'SELECT * FROM venues where uuid = ?;',
+        [venueId]
+    )
+    return data
+}
+
 export function addVenue(venue: Venue) {
     return executeQuery(
         'INSERT INTO venues (uuid, organisations_uuid, name, address) VALUES(uuid(), ?, ?, ?)',

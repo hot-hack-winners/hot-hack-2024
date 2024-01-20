@@ -20,6 +20,14 @@ export function getAllGigs() {
     )
 }
 
+export function getGigByID(gigId: string) {
+    const data = executeQuery<Gig>(
+        'SELECT * FROM gigs where uuid = ?;',
+        [gigId]
+    )
+    return data
+}
+
 export function addGig(gig: Gig) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return executeQuery(
