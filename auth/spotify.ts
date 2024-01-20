@@ -47,7 +47,7 @@ export async function beginLogin() {
   const params = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_SPOTIFY_ID!,
     response_type: 'code',
-    redirect_uri: `http://localhost:3000//callback`,
+    redirect_uri: HOST_NAME + `/callback`,
     code_challenge_method: 'S256',
     code_challenge: await generateCodeChallenge(code_verifier),
     state: state,
@@ -79,7 +79,7 @@ export async function completeLogin() {
   await createAccessToken({
     grant_type: 'authorization_code',
     code: params.get('code')!,
-    redirect_uri: `http://localhost:3000//callback`,
+    redirect_uri: HOST_NAME + `/callback`,
     code_verifier: code_verifier!,
   })
 }
