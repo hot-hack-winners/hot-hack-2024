@@ -3,8 +3,8 @@ import { z } from 'zod';
 
 const venueSchema = z.object(
     {
-        venues_uuid: z.string().optional(),
-        organisation_uuid: z.string().optional(),
+        uuid: z.string().optional(),
+        organisations_uuid: z.string(),
         name: z.string(),
         address: z.string(),
     }
@@ -19,9 +19,17 @@ export function getAllVenues() {
     )
 }
 
+export function getVenueByID(venueId: string) {
+    const data = executeQuery<Venue>(
+        'SELECT * FROM venues where uuid = ?;',
+        [venueId]
+    )
+    return data
+}
+
 export function addVenue(venue: Venue) {
     return executeQuery(
-        'INSERT INTO venues (venues_uuid, organisation_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
-        [venue.organisation_uuid, venue.name, venue.address]
+        'INSERT INTO venues (uuid, organisations_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
+        [venue.organisations_uuid, venue.name, venue.address]
     )
 }

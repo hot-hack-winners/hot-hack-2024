@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const attendeeSchema = z.object(
     {
-        attendees_uuid: z.string().optional(),
+        uuid: z.string().optional(),
         spotify_id: z.string().optional(),
         name: z.string(),
         email: z.string(),
@@ -20,10 +20,18 @@ export function getAllAttendees() {
     )
 }
 
+export function getAttendeeByID(attendeeId: string) {
+    const data = executeQuery<Attendee>(
+        'SELECT * FROM attendees where uuid = ?;',
+        [attendeeId]
+    )
+    return data
+}
+
 export function addAttendee(attendee: Attendee) {
     const saltRounds: number = 10;
     return executeQuery(
-        'INSERT INTO attendees (attendees_uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
+        'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
         [attendee.spotify_id, attendee.name, attendee.email]
     )
 }
