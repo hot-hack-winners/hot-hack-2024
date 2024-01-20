@@ -9,16 +9,23 @@ export default function Page() {
 
   useEffect(() => {
     completeLogin()
-    .then(() => {
-      const savedUrl = sessionStorage.getItem('preAuthUrl');
-      console.log()
-      router.push(savedUrl);
-    })
-    .catch((error) => {
-      console.error(error)
-      router.replace('/')
-    })
-  }, [])
+      .then( async ()  =>  {
+        const savedUrl = sessionStorage.getItem('preAuthUrl');
+        const test = await getAccessToken();
+        console.log(test)
+        
+        if (savedUrl) {
+          router.push(savedUrl);
+        }
+        else {
+          router.push('/profile');
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+        router.replace('/')
+      })
+    }, [])
 
   return (
     <div>

@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 
 
 export default function Page() {
-    const { user, loggedOut, isLoading, mutate } = useUser()
-
+    const { user, loggedOut, mutate } = useUser()
+0
     return user ? <ScanDashboard playlistId={'3cEYpjA9oz9GiPac4AsH4n'} /> :  <UserLogin/>
 }

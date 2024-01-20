@@ -12,12 +12,6 @@ export  function UserLogin() {
   const { user } = useUser()
   const router = useRouter()
   // if logged in, redirect to the dashboard
-  useEffect(() => {
-    if (user) {
-        const savedUrl = sessionStorage.getItem('preAuthUrl');
-        router.push(savedUrl);
-    }
-  }, [user])
 
 
   return (
