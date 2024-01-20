@@ -54,13 +54,14 @@ export function ScanDashboard(playlistId : string) {
             <p className="text-xl">Here is nostalgia waiting.</p>
             {data && <p>{data.name}</p>}
              <img  style={{display: 'block', height: 300, width: 300,}} src={data && data.images[0].url  } ></img>
-            <button onClick={handleFollowClick}>
+            <button onClick={handleFollowClick}
+              className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
+              >
              {isPressed ? 'Followed' : "Follow"}
              
           </button>
 
             <button
-              className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
               onClick={async () => {
                 logout()
                 await mutate(null) // optimistically update the data and revalidate

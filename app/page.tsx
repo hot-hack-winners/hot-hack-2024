@@ -22,8 +22,6 @@ export default function Home() {
 
   return (
     <div className="homepage">
-
-
       <main className="p-2 flex flex-col max-w-xs mx-auto my-4 text-center space-y-4">
         <h1 className="text-4xl">Insert app name here</h1>
         <br />
