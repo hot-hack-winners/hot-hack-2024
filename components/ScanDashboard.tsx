@@ -16,9 +16,13 @@ export function ScanDashboard(playlistId : string) {
   const { topArtists, isLoading, isError } = useTopArtists() 
   useEffect(() => {
     if (loggedOut) {
+      sessionStorage.setItem('preAuthUrl', window.location.href);
+      const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/'))
     }
   }, [loggedOut, mutate])
+
+  
 
   const handleFollowClick = async () => {
     try {
