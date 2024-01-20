@@ -1,12 +1,12 @@
 
 'use client'
 
-import {DashboardComponent} from '@/components/DashboardComponent'
+import {ScanDashboard} from '@/components/ScanDashboard'
 
 
 export default function Page() {
 
 
-    return <DashboardComponent/>
+    return 
 
 }

@@ -14,19 +14,16 @@ export default function Home() {
   // if logged in, redirect to the dashboard
   useEffect(() => {
     if (user) {
-      router.replace('/dashboard')
+        const savedUrl =   sessionStorage.getItem('preAuthUrl');
+        router.push(savedUrl);
+        sessionStorage.removeItem('preAuthUrl'); // Clean up
     }
   }, [user])
 
   return (
     <div className="homepage">
-      <Head>
-        <title>Please Login</title>
-      </Head>
-
-
       <main className="p-2 flex flex-col max-w-xs mx-auto my-4 text-center space-y-4">
-        <h1 className="text-4xl">Do something cool with your Spotify data.</h1>
+        <h1 className="text-4xl">Insert app name here</h1>
         <br />
         <button
           className="px-4 py-2 rounded-full bg-gradient-to-tr from-pink-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
@@ -36,14 +33,6 @@ export default function Home() {
         >
           Login with Spotify to continue
         </button>
-        <p>
-          <a
-            className="px-4 py-2 text-blue-600 font-bold hover:underline"
-            href="https://github.com/DavidJones418/swr-spotify-example"
-          >
-            source
-          </a>
-        </p>
       </main>
     </div>
   )
