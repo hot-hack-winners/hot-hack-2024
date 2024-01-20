@@ -4,7 +4,7 @@ import { z } from 'zod';
 const gigSchema = z.object(
     {
         uuid: z.string().optional(),
-        venue_uuid: z.string().optional(),
+        venue_uuid: z.string(),
         start_time: z.string().datetime(),
         end_time: z.string().datetime(),
         spotify_playlist_id: z.string().optional()

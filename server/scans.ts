@@ -5,9 +5,9 @@ const scanSchema = z.object(
     {
         uuid: z.string().optional(),
         timestamp: z.string().datetime(),
-        attendees_uuid: z.string().optional(),
-        gigs_uuid: z.string().optional(),
-        venues_uuid: z.string().optional(),
+        attendees_uuid: z.string(),
+        gigs_uuid: z.string(),
+        venues_uuid: z.string(),
     }
 )
 

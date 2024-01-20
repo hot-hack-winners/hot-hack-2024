@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 const adminSchema = z.object(
     {
         uuid: z.string().optional(),
-        organisation_uuid: z.string().optional(),
+        organisations_uuid: z.string(),
         name: z.string(),
         email: z.string(),
         password: z.string()
@@ -26,8 +26,8 @@ export function registerAdmin(adminUser: Admin) {
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(adminUser.password, salt, function (err, hash) {
             return executeQuery(
-                'INSERT INTO admins (uuid, organisation_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
-                [adminUser.organisation_uuid, adminUser.name, adminUser.email, hash]
+                'INSERT INTO admins (uuid, organisations_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
+                [adminUser.organisations_uuid, adminUser.name, adminUser.email, hash]
             )
         });
     });
