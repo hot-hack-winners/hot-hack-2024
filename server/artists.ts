@@ -26,7 +26,7 @@ export function getArtistByID(artistId: string) {
     return data
 }
 
-export function addArtist(artist: Artist) {
+export function addArtist(artist: Saveable<Artist>) {
     return executeQuery(
         'INSERT INTO artists (uuid, name, spotify_id) VALUES(uuid(), ?, ?)',
         [artist.name, artist.spotify_id]

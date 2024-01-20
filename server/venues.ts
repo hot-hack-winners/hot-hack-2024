@@ -27,7 +27,7 @@ export function getVenueByID(venueId: string) {
     return data
 }
 
-export function addVenue(venue: Venue) {
+export function addVenue(venue: Saveable<Venue>) {
     return executeQuery(
         'INSERT INTO venues (uuid, organisations_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
         [venue.organisations_uuid, venue.name, venue.address]

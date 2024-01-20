@@ -29,7 +29,7 @@ export function getAdminByID(adminId: string) {
     return data
 }
 
-export function registerAdmin(adminUser: Admin) {
+export function registerAdmin(adminUser: Saveable<Admin>) {
     const saltRounds: number = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(adminUser.password, salt, function (err, hash) {

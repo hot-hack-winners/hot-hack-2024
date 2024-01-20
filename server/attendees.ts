@@ -28,7 +28,7 @@ export function getAttendeeByID(attendeeId: string) {
     return data
 }
 
-export function addAttendee(attendee: Attendee) {
+export function addAttendee(attendee: Saveable<Attendee>) {
     const saltRounds: number = 10;
     return executeQuery(
         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',

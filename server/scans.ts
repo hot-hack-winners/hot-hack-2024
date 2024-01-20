@@ -28,7 +28,7 @@ export function getScanByID(scanId: string) {
     return data
 }
 
-export function addScan(scan: Scan) {
+export function addScan(scan: Saveable<Scan>) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return executeQuery(
         'INSERT INTO scans (uuid, timestamp, attendees_uuid, gigs_uuid, venues_uuid) VALUES(uuid(), ?, ?, ?, ?)',

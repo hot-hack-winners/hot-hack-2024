@@ -41,7 +41,7 @@ export function getGigByID(gigId: string) {
     return data
 }
 
-export function addGig(gig: Gig) {
+export function addGig(gig: Saveable<Gig>) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return executeQuery(
         'INSERT INTO gigs (uuid, venue_uuid, start_time, end_time, spotify_playlist_id) VALUES(uuid(), ?, ?, ?, ?)',

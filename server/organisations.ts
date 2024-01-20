@@ -26,7 +26,7 @@ export function getOrganisationByID(organisationId: string) {
     return data
 }
 
-export function addOrgnisation(organisation: Organisation) {
+export function addOrgnisation(organisation: Saveable<Organisation>) {
 
     return executeQuery(
         'INSERT INTO organisations (uuid, name, ABN) VALUES(uuid(), ?, ?)',
