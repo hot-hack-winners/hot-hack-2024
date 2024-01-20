@@ -14,7 +14,7 @@ export default function Home() {
   // if logged in, redirect to the dashboard
   useEffect(() => {
     if (user) {
-        const savedUrl =   sessionStorage.getItem('preAuthUrl');
+        const savedUrl = sessionStorage.getItem('preAuthUrl');
         router.push(savedUrl);
         sessionStorage.removeItem('preAuthUrl'); // Clean up
     }
