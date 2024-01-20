@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const artistSchema = z.object(
     {
-        admin_uuid: z.string().optional(),
+        uuid: z.string().optional(),
         spotify_id: z.string().optional(),
         name: z.string(),
     }
@@ -20,7 +20,7 @@ export function getAllArtists() {
 
 export function addArtist(artist: Artist) {
     return executeQuery(
-        'INSERT INTO artists (artists_uuid, name, spotify_id) VALUES(uuid(), ?, ?)',
+        'INSERT INTO artists (uuid, name, spotify_id) VALUES(uuid(), ?, ?)',
         [artist.name, artist.spotify_id]
     )
 

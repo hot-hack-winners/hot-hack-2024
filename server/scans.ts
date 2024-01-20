@@ -3,11 +3,11 @@ import { z } from 'zod';
 
 const scanSchema = z.object(
     {
-        scans_uuid: z.string().optional(),
+        uuid: z.string().optional(),
         timestamp: z.string().datetime(),
-        attendee_uuid: z.string().optional(),
+        attendees_uuid: z.string().optional(),
         gigs_uuid: z.string().optional(),
-        venue_uuid: z.string().optional(),
+        venues_uuid: z.string().optional(),
     }
 )
 
@@ -23,7 +23,7 @@ export function getAllScans() {
 export function addScan(scan: Scan) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return executeQuery(
-        'INSERT INTO scans (scans_uuid, timestamp, attendee_uuid, gigs_uuid, venue_uuid) VALUES(uuid(), ?, ?, ?, ?)',
-        [scan.timestamp, scan.attendee_uuid, scan.gigs_uuid, scan.venue_uuid]
+        'INSERT INTO scans (uuid, timestamp, attendees_uuid, gigs_uuid, venues_uuid) VALUES(uuid(), ?, ?, ?, ?)',
+        [scan.timestamp, scan.attendees_uuid, scan.gigs_uuid, scan.venues_uuid]
     )
 }

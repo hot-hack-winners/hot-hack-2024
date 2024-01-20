@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const venueSchema = z.object(
     {
-        venues_uuid: z.string().optional(),
+        uuid: z.string().optional(),
         organisation_uuid: z.string().optional(),
         name: z.string(),
         address: z.string(),
@@ -21,7 +21,7 @@ export function getAllVenues() {
 
 export function addVenue(venue: Venue) {
     return executeQuery(
-        'INSERT INTO venues (venues_uuid, organisation_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
+        'INSERT INTO venues (uuid, organisation_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
         [venue.organisation_uuid, venue.name, venue.address]
     )
 }
