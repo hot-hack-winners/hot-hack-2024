@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { generateQR } from '@/lib/qrCodeGen';
 
+// Define the styles as a TypeScript type
+type Styles = {
+    [key: string]: React.CSSProperties;
+};
 
-
-
-
-
-
-
-const styles = {
+const styles: Styles = {
     qrCodeGenerator: {
         // Add styling for the QR code generator container
     },
@@ -30,12 +28,11 @@ const styles = {
     },
 };
 
-
 export function CreateQrCode() {
-    const [venueId, setVenueId] = useState('');
-    const [qrCodeUrl, setQrCodeUrl] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [venueId, setVenueId] = useState<string>('');
+    const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleGenerateQR = async () => {
         if (!venueId) {
@@ -47,7 +44,7 @@ export function CreateQrCode() {
         setError(null);
 
         try {
-            const qrCodeDataUrl = await generateQR(venueId);
+            const qrCodeDataUrl: string | null = await generateQR(venueId);
             setQrCodeUrl(qrCodeDataUrl);
         } catch (err) {
             setError('Error generating QR Code');
@@ -57,20 +54,24 @@ export function CreateQrCode() {
         }
     };
 
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setVenueId(e.target.value);
+    };
+
     return (
-        <div className={styles.qrCodeGenerator}>
+        <div style={styles.qrCodeGenerator}>
             <input 
                 type="text"
                 placeholder="Enter venue ID"
                 value={venueId}
-                onChange={(e) => setVenueId(e.target.value)}
-                className={styles.input}
+                onChange={handleChange}
+                style={styles.input}
             />
-            <button onClick={handleGenerateQR} disabled={isLoading} className={styles.button}>
+            <button onClick={handleGenerateQR} disabled={isLoading} style={styles.button}>
                 {isLoading ? 'Generating...' : 'Generate QR Code'}
             </button>
-            {error && <div className={styles.error}>{error}</div>}
-            {qrCodeUrl && <img src={qrCodeUrl} alt="QR Code" className={styles.qrCodeImage} />}
+            {error && <div style={styles.error}>{error}</div>}
+            {qrCodeUrl && <img src={qrCodeUrl} alt="QR Code" style={styles.qrCodeImage} />}
         </div>
     );
 }
