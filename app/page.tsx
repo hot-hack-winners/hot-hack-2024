@@ -9,6 +9,10 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 
 export default function Home() {
+  const hostName = process.env.NEXT_PUBLIC_HOST_NAME;
+
+  console.log(hostName + `/callback`)
+
   return (
     <div className="homepage">
       <main className="p-2 flex flex-col max-w-xs mx-auto my-4 text-center space-y-4">
