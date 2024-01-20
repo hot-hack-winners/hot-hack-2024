@@ -22,14 +22,9 @@ export function getAllAdmins() {
 }
 
 export function registerAdmin(adminUser: Admin) {
-
     const saltRounds: number = 10;
-    console.log("Entered registerFunction")
     bcrypt.genSalt(saltRounds, function (err, salt) {
-        console.log("salt")
-        console.log(salt)
         bcrypt.hash(adminUser.password, salt, function (err, hash) {
-            console.log(hash)
             return executeQuery(
                 'INSERT INTO admins (admin_uuid, organisation_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
                 [adminUser.organisation_uuid, adminUser.name, adminUser.email, hash]
