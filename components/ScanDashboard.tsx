@@ -6,7 +6,7 @@ import { logout } from '../auth/spotify'
 import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
-
+import {addScan} from '@/server/addScan'
 interface ScanDashboardProps {
   playlistId: string
 }
