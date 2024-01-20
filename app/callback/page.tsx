@@ -11,7 +11,7 @@ export default function Page() {
   useEffect(() => {
     completeLogin()
       .then(() => {
-        Router.push('/dashboard')
+        Router.push('/profile')
       })
       .catch((error) => {
         console.error(error)
