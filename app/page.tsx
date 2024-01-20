@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client';
 
 import { beginLogin } from '../auth/spotify'
@@ -8,9 +7,6 @@ import useUser from '../auth/use-user'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import Head from 'next/head'
-=======
-import PostLoginCard from "@/components/postLogin";
->>>>>>> main
 
 export default function Home() {
   const { user } = useUser()
@@ -23,7 +19,6 @@ export default function Home() {
   }, [user])
 
   return (
-<<<<<<< HEAD
     <div className="homepage">
       <Head>
         <title>Please Login</title>
@@ -53,10 +48,3 @@ export default function Home() {
     </div>
   )
 }
-=======
-    <main className="h-dvh bg-black">
-      <PostLoginCard/>
-    </main>
-  );
-}
->>>>>>> main
