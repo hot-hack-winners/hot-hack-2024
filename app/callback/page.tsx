@@ -11,7 +11,7 @@ export default function Page() {
   useEffect(() => {
     completeLogin()
       .then(() => {
-        Router.push('/profile')
+        router.push('/scan/1')
       })
       .catch((error) => {
         console.error(error)

@@ -62,7 +62,7 @@ function randomBytes(size) {
       code_challenge_method: 'S256',
       code_challenge: await generateCodeChallenge(code_verifier),
       state: state,
-      scope: 'user-top-read user-read-private', 
+      scope: 'user-top-read user-read-private playlist-modify-public playlist-modify-private', 
     })
   
     sessionStorage.setItem('code_verifier', code_verifier)
@@ -102,18 +102,23 @@ function randomBytes(size) {
   /**
    * @param {RequestInfo} input
    */
-  export async function fetchWithToken(input) {
-    const accessToken = await getAccessToken()
+  export async function fetchWithToken(input, method = 'GET', body = null) {
+    const accessToken = await getAccessToken();
     
     if (!accessToken) {
-      throw new ErrorResponse(new Response(undefined, { status: 401 }), {})
+      throw new ErrorResponse(new Response(undefined, { status: 401 }), {});
     }
   
-    return fetchJSON(input, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-  }
+    const headers = { Authorization: `Bearer ${accessToken}` };
+    if (body) headers['Content-Type'] = 'application/json';
   
+    return fetchJSON(input, {
+      method: method,
+      headers: headers,
+      body: body ? JSON.stringify(body) : null,
+    });
+  }
+    
   /**
    * @param {Record<string, string>} params
    * @returns {Promise<string>}
