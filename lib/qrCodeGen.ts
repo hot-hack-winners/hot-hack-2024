@@ -1,6 +1,6 @@
 import * as QRCode from "qrcode";
 
-const URL: string = "https://localhost:3000";
+const URL: string = process.env.HOST_NAME;
 
 export function generateQR(venueId: string) {
     const scanURL = URL.concat("/scan/").concat(venueId);
