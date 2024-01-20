@@ -43,11 +43,10 @@ export async function beginLogin() {
   // https://tools.ietf.org/html/rfc7636#section-4.1
   const code_verifier = base64url(randomBytes(96))
   const state = base64url(randomBytes(96))
-
   const params = new URLSearchParams({
     client_id: process.env.NEXT_PUBLIC_SPOTIFY_ID!,
     response_type: 'code',
-    redirect_uri: process.env.HOST_NAME + `/callback`,
+    redirect_uri: process.env.NEXT_PUBLIC_HOST_NAME + `/callback`,
     code_challenge_method: 'S256',
     code_challenge: await generateCodeChallenge(code_verifier),
     state: state,
@@ -79,7 +78,7 @@ export async function completeLogin() {
   await createAccessToken({
     grant_type: 'authorization_code',
     code: params.get('code')!,
-    redirect_uri: process.env.HOST_NAME + `/callback`,
+    redirect_uri: process.env.NEXT_PUBLIC_HOST_NAME + `/callback`,
     code_verifier: code_verifier!,
   })
 }
