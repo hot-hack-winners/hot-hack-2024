@@ -20,6 +20,21 @@ export function getAllGigs() {
     )
 }
 
+// getCurrentVenueGig()
+export function getCurrentVenueGig(venueId: string, currentTime: string) {
+    // Current time need to be in ISO format, eg: 2024-01-19T12:00:00Z
+    const data = executeQuery<Gig>(
+        `SELECT * FROM gigs 
+        where venue_uuid = ? 
+            and ? >= start_time
+            and ? <= end_time`,
+        [venueId, currentTime, currentTime]
+    )
+    return data
+}
+
+
+
 export function getGigByID(gigId: string) {
     const data = executeQuery<Gig>(
         'SELECT * FROM gigs where uuid = ?;',
