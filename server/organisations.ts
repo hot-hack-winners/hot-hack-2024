@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const organisationSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         name: z.string(),
         ABN: z.string(),
     }

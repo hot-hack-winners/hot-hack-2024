@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const adminSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         organisations_uuid: z.string(),
         name: z.string(),
         email: z.string(),

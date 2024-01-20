@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const artistSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         spotify_id: z.string().optional(),
         name: z.string(),
     }

@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const scanSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         timestamp: z.string().datetime(),
         attendees_uuid: z.string(),
         gigs_uuid: z.string(),

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const attendeeSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         spotify_id: z.string().optional(),
         name: z.string(),
         email: z.string(),

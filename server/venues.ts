@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const venueSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         organisations_uuid: z.string(),
         name: z.string(),
         address: z.string(),

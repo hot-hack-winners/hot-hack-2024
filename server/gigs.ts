@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const gigSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         venue_uuid: z.string(),
         start_time: z.string().datetime(),
         end_time: z.string().datetime(),
@@ -32,8 +32,6 @@ export function getCurrentVenueGig(venueId: string, currentTime: string) {
     )
     return data
 }
-
-
 
 export function getGigByID(gigId: string) {
     const data = executeQuery<Gig>(
