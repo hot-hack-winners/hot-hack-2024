@@ -43,9 +43,11 @@ const RAW_RUNTIME_STATE =
           ["lucide-react", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:0.312.0"],\
           ["next", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:14.1.0"],\
           ["postcss", "npm:8.4.33"],\
+          ["querystring", "npm:0.2.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:18.2.0"],\
           ["react-hook-form", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:7.49.3"],\
+          ["swr", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.2.4"],\
           ["tailwind-merge", "npm:2.2.0"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["tailwindcss-animate", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.7"],\
@@ -2089,7 +2091,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["debug", "virtual:2a426afc4b2eef43db12a540d29c2b5476640459bfcd5c24f86bb401cf8cce97e63bd81794d206a5643057e7f662643afd5ce3dfc4d4bfd8e706006c6309c5fa#npm:3.2.7"],\
           ["@types/supports-color", null],\
-          ["ms", "npm:2.1.2"],\
+          ["ms", "npm:2.1.3"],\
           ["supports-color", null]\
         ],\
         "packagePeers": [\
@@ -2462,7 +2464,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-import", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:2.29.1"],\
           ["eslint-plugin-jsx-a11y", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:6.8.0"],\
           ["eslint-plugin-react", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:7.33.2"],\
-          ["eslint-plugin-react-hooks", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:4.6.0"],\
+          ["eslint-plugin-react-hooks", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:5.0.0-canary-7118f5dd7-20230705"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"]\
         ],\
         "packagePeers": [\
@@ -2708,17 +2710,17 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["eslint-plugin-react-hooks", [\
-      ["npm:4.6.0", {\
-        "packageLocation": "./.yarn/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-3c63134e05.zip/node_modules/eslint-plugin-react-hooks/",\
+      ["npm:5.0.0-canary-7118f5dd7-20230705", {\
+        "packageLocation": "./.yarn/cache/eslint-plugin-react-hooks-npm-5.0.0-canary-7118f5dd7-20230705-2292094517-0e0e80c215.zip/node_modules/eslint-plugin-react-hooks/",\
         "packageDependencies": [\
-          ["eslint-plugin-react-hooks", "npm:4.6.0"]\
+          ["eslint-plugin-react-hooks", "npm:5.0.0-canary-7118f5dd7-20230705"]\
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:4.6.0", {\
-        "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-101e639826/0/cache/eslint-plugin-react-hooks-npm-4.6.0-b429fac07f-3c63134e05.zip/node_modules/eslint-plugin-react-hooks/",\
+      ["virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:5.0.0-canary-7118f5dd7-20230705", {\
+        "packageLocation": "./.yarn/__virtual__/eslint-plugin-react-hooks-virtual-2bf4e1a58e/0/cache/eslint-plugin-react-hooks-npm-5.0.0-canary-7118f5dd7-20230705-2292094517-0e0e80c215.zip/node_modules/eslint-plugin-react-hooks/",\
         "packageDependencies": [\
-          ["eslint-plugin-react-hooks", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:4.6.0"],\
+          ["eslint-plugin-react-hooks", "virtual:6d562b481a0367179f59450c3d646ad79397c710b49588966678d75c0343dabb3ee4d4b9ae2fa14453d9f340a6d4bf21c3d8ea15c31fc7892785486a008e409e#npm:5.0.0-canary-7118f5dd7-20230705"],\
           ["@types/eslint", null],\
           ["eslint", "npm:8.56.0"]\
         ],\
@@ -3248,9 +3250,11 @@ const RAW_RUNTIME_STATE =
           ["lucide-react", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:0.312.0"],\
           ["next", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:14.1.0"],\
           ["postcss", "npm:8.4.33"],\
+          ["querystring", "npm:0.2.1"],\
           ["react", "npm:18.2.0"],\
           ["react-dom", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:18.2.0"],\
           ["react-hook-form", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:7.49.3"],\
+          ["swr", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.2.4"],\
           ["tailwind-merge", "npm:2.2.0"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["tailwindcss-animate", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.7"],\
@@ -4097,6 +4101,13 @@ const RAW_RUNTIME_STATE =
           ["ms", "npm:2.1.2"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:2.1.3", {\
+        "packageLocation": "./.yarn/cache/ms-npm-2.1.3-81ff3cfac1-aa92de6080.zip/node_modules/ms/",\
+        "packageDependencies": [\
+          ["ms", "npm:2.1.3"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["mz", [\
@@ -4697,6 +4708,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/punycode-npm-2.3.1-97543c420d-febdc4362b.zip/node_modules/punycode/",\
         "packageDependencies": [\
           ["punycode", "npm:2.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["querystring", [\
+      ["npm:0.2.1", {\
+        "packageLocation": "./.yarn/cache/querystring-npm-0.2.1-15cb60859d-5ae2eeb8c6.zip/node_modules/querystring/",\
+        "packageDependencies": [\
+          ["querystring", "npm:0.2.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5359,6 +5379,30 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["swr", [\
+      ["npm:2.2.4", {\
+        "packageLocation": "./.yarn/cache/swr-npm-2.2.4-5bec6d25f9-feb2fb5d3f.zip/node_modules/swr/",\
+        "packageDependencies": [\
+          ["swr", "npm:2.2.4"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.2.4", {\
+        "packageLocation": "./.yarn/__virtual__/swr-virtual-e06434ff7d/0/cache/swr-npm-2.2.4-5bec6d25f9-feb2fb5d3f.zip/node_modules/swr/",\
+        "packageDependencies": [\
+          ["swr", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.2.4"],\
+          ["@types/react", "npm:18.2.48"],\
+          ["client-only", "npm:0.0.1"],\
+          ["react", "npm:18.2.0"],\
+          ["use-sync-external-store", "virtual:e06434ff7d1eaaae05fed6fb0964a3881bea72912316af37a8c214798f4a281b9625d38eb0850d222d804b2a162d90fc9d7d3370902d73d94c22d97df7ce30d9#npm:1.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["tailwind-merge", [\
       ["npm:2.2.0", {\
         "packageLocation": "./.yarn/cache/tailwind-merge-npm-2.2.0-6088dff121-ec2a249da3.zip/node_modules/tailwind-merge/",\
@@ -5732,6 +5776,28 @@ const RAW_RUNTIME_STATE =
           ["detect-node-es", "npm:1.1.0"],\
           ["react", "npm:18.2.0"],\
           ["tslib", "npm:2.6.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["use-sync-external-store", [\
+      ["npm:1.2.0", {\
+        "packageLocation": "./.yarn/cache/use-sync-external-store-npm-1.2.0-44f75d2564-a676216aff.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "npm:1.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:e06434ff7d1eaaae05fed6fb0964a3881bea72912316af37a8c214798f4a281b9625d38eb0850d222d804b2a162d90fc9d7d3370902d73d94c22d97df7ce30d9#npm:1.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/use-sync-external-store-virtual-8fb55fe45d/0/cache/use-sync-external-store-npm-1.2.0-44f75d2564-a676216aff.zip/node_modules/use-sync-external-store/",\
+        "packageDependencies": [\
+          ["use-sync-external-store", "virtual:e06434ff7d1eaaae05fed6fb0964a3881bea72912316af37a8c214798f4a281b9625d38eb0850d222d804b2a162d90fc9d7d3370902d73d94c22d97df7ce30d9#npm:1.2.0"],\
+          ["@types/react", "npm:18.2.48"],\
+          ["react", "npm:18.2.0"]\
         ],\
         "packagePeers": [\
           "@types/react",\
