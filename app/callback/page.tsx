@@ -12,8 +12,13 @@ export default function Page() {
     completeLogin()
       .then(() => {
         const savedUrl = sessionStorage.getItem('preAuthUrl');
-        console.log()
-        router.push(savedUrl);
+
+        if (savedUrl) {
+          router.push(savedUrl);
+        }
+        else {
+          router.push('/profile');
+        }
       })
       .catch((error) => {
         console.error(error)
