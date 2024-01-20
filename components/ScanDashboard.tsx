@@ -8,7 +8,7 @@ import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 export function ScanDashboard(playlistId : string) {
   const [isPressed, setIsPressed] =  useState(false)
-  const { follow, isFollowing, error } = useFollowPlaylist(playlistId.playlistId);
+  const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId.playlistId);
   const router = useRouter()
   const { user, loggedOut, mutate } = useUser()
   const { topArtists, isLoading, isError } = useTopArtists() 
@@ -47,8 +47,8 @@ export function ScanDashboard(playlistId : string) {
           <>
             <h1 className="text-4xl">Welcome, {user.display_name}</h1>
             <p className="text-xl">Here is nostalgia waiting.</p>
-            <p className="text-xl">Here is nostalgia waiting.</p>
-
+            {data && <p>{data.description}</p>}
+            <img href></img>
             <button onClick={handleFollowClick}>
              {isPressed ? 'Followed' : "Follow"}
           </button>

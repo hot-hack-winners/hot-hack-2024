@@ -7,7 +7,7 @@ export default function useFollowPlaylist(playlistId : string) {
     playlistId ? `https://api.spotify.com/v1/playlists/${playlistId}` : null,
     fetchWithToken
   );
-
+  console.log(data)
   const follow = async () => {
     if (playlistId) {
       try {
