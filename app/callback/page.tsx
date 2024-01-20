@@ -11,13 +11,20 @@ export default function Page() {
   useEffect(() => {
     completeLogin()
       .then(() => {
-        router.push('/scan/1')
+        const savedUrl = sessionStorage.getItem('preAuthUrl');
+
+        if (savedUrl) {
+          router.push(savedUrl);
+        }
+        else {
+          router.push('/profile');
+        }
       })
       .catch((error) => {
         console.error(error)
         router.replace('/')
       })
-  }, [])
+    }, [])
 
   return (
     <div>

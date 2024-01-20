@@ -9,19 +9,8 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 
 export default function Home() {
-  const { user } = useUser()
-  const router = useRouter()
-  // if logged in, redirect to the dashboard
-  useEffect(() => {
-    if (user) {
-      router.replace('/scan/1')
-    }
-  }, [user])
-
   return (
     <div className="homepage">
-
-
       <main className="p-2 flex flex-col max-w-xs mx-auto my-4 text-center space-y-4">
         <h1 className="text-4xl">Insert app name here</h1>
         <br />

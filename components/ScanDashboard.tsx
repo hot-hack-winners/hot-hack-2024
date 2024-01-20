@@ -7,18 +7,24 @@ import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
-
-export function ScanDashboard(playlistId : string) {
+interface ScanDashboardProps {
+  playlistId: string
+}
+export function ScanDashboard({ playlistId }: ScanDashboardProps) {
   const [isPressed, setIsPressed] =  useState(false)
-  const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId.playlistId);
+  const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId);
   const router = useRouter()
   const { user, loggedOut, mutate } = useUser()
-  const { topArtists, isLoading, isError } = useTopArtists() 
+  const { topArtists, isLoading, isError } = useTopArtists()
   useEffect(() => {
     if (loggedOut) {
+      sessionStorage.setItem('preAuthUrl', window.location.href);
+      const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/'))
     }
   }, [loggedOut, mutate])
+
+
 
   const handleFollowClick = async () => {
     try {
@@ -50,20 +56,21 @@ export function ScanDashboard(playlistId : string) {
             <p className="text-xl">Here is nostalgia waiting.</p>
             {data && <p>{data.name}</p>}
              <img  style={{display: 'block', height: 300, width: 300,}} src={data && data.images[0].url  } ></img>
-            <button onClick={handleFollowClick}>
+            <button onClick={handleFollowClick}
+              className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
+              >
              {isPressed ? 'Followed' : "Follow"}
-             
+
           </button>
 
             <button
-              className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
               onClick={async () => {
                 logout()
                 await mutate(null) // optimistically update the data and revalidate
                 router.push('/')
               }}
             >
-              
+
               Logout
             </button>
           </>
