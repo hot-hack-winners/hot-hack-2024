@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt';
 
 const adminSchema = z.object(
     {
-        admin_uuid: z.string().optional(),
-        organisation_uuid: z.string().optional(),
+        uuid: z.string().optional(),
+        organisations_uuid: z.string(),
         name: z.string(),
         email: z.string(),
         password: z.string()
@@ -21,15 +21,22 @@ export function getAllAdmins() {
     )
 }
 
+export function getAdminByID(adminId: string) {
+    const data = executeQuery<Admin>(
+        'SELECT * FROM admins where uuid = ?;',
+        [adminId]
+    )
+    return data
+}
+
 export function registerAdmin(adminUser: Admin) {
     const saltRounds: number = 10;
     bcrypt.genSalt(saltRounds, function (err, salt) {
         bcrypt.hash(adminUser.password, salt, function (err, hash) {
             return executeQuery(
-                'INSERT INTO admins (admin_uuid, organisation_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
-                [adminUser.organisation_uuid, adminUser.name, adminUser.email, hash]
+                'INSERT INTO admins (uuid, organisations_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
+                [adminUser.organisations_uuid, adminUser.name, adminUser.email, hash]
             )
         });
     });
-
 }
