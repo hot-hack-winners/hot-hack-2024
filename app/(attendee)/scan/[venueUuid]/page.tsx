@@ -10,6 +10,6 @@ interface PageProps {
 }
 export default function Page(props: PageProps) {
     return (
-        <ScanDashboard playlistId={'3cEYpjA9oz9GiPac4AsH4n'} venueUuid={props.params.venueUuid} />
+        <ScanDashboard playlistId={'5VwYIrOYiEH3NFGysW3KGK'} venueUuid={props.params.venueUuid} />
     );
 }
