@@ -54,13 +54,16 @@ export default function VenuesDashboard() {
       });
     test()
     .then((data) =>  {
-      if ('error' in data) {
-        console.error(data.error);
-        return;
+      if (data){
+        if ('error' in data) {
+          console.error(data.error);
+          return;
+        }
+        setbestArtists(data);
+  
+        console.log(data)
+  
       }
-      setbestArtists(data);
-
-      console.log(data)
     });
   }, []);
 
