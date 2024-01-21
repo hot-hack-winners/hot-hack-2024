@@ -7,7 +7,8 @@ import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
-import {addOrgnisation} from '@/server/organisations'
+//import {submitScan} from '@/server/favourites'
+
 interface ScanDashboardProps {
   playlistId: string
 }
@@ -26,14 +27,23 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
     }
     if (!loggedOut){
 
-      const organisationSchema = {
-            uuid: "4232",
-            name: "Jesse",
-            ABN: "1234432342",
-        }
-    
-        addOrgnisation(organisationSchema);
+      //const tokenSet = localStorage.getItem('tokenSet');
+      //const token = JSON.parse(tokenSet)
+      // Assuming the user object has the necessary properties
 
+      const attendee_uuid = user.id; // Replace with the actual property from user object
+      const venue_uuid = 'venue_uuid_here'; 
+      const spotify_token = user.spotify_token; 
+      const current_time = new Date().toISOString(); /
+
+     /* submitScan(attendee_uuid, venue_uuid, spotify_token, current_time)
+        .then(topArtists => {
+          console.log('Scan submitted successfully. Top Artists:', topArtists);
+        })
+        .catch(error => {
+          console.error('Error submitting scan:', error);
+        });
+*/
     }
   
     
