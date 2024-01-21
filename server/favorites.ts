@@ -46,7 +46,7 @@ async function topUserArtists(spotifyToken: string) {
                 }
             })
         const responseJson = await response.json()
-        console.log(responseJson)
+        // console.log(responseJson)
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
         // console.log(items)
         return  await items
@@ -57,6 +57,7 @@ async function topUserArtists(spotifyToken: string) {
 
 export async function submitScan(spotify_user_id: string, venue_uuid: string, spotify_token: string) {
     const current_time = new Date().toISOString();
+    console.log(current_time)
     const [venue, topArtists, currentGig,] = await Promise.all(
         [
             getVenueByID(venue_uuid),
@@ -78,6 +79,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
     const scan = {
         gigs_uuid: currentGig[0].uuid, attendees_uuid: user[0].uuid, timestamp: current_time, venues_uuid: venue_uuid
     }
+    console.log(scan)
     await addScan(scan)
 
     // Add user favorites
