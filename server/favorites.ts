@@ -39,7 +39,7 @@ export async function getFavoritesByVenueArtistId(venuesUuid: string, spotifyArt
     	    score += (Date.now() - favourite.timestamp)/favourite.rank;
     	});
     }
-    return score * weight;
+    return await score * weight;
 }
 
 export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId: string) {
@@ -59,7 +59,7 @@ export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId
     	    score += (Date.now() - favourite.timestamp)/favourite.rank;
     	});
     }
-    return score * weight;
+    return  await score * weight;
 }
 
 export async function getBestArtistForVenue(venueUuid: string) {
@@ -68,15 +68,13 @@ export async function getBestArtistForVenue(venueUuid: string) {
 	WHERE venues_uuid = ?`,
 	[venueUuid]
     );
-    let artistScores: {}[] = [];
+    
     if ('error' in artists) {
-	console.log("Error");
-    } else {
-	artists.forEach((artist) => {
-    	    artistScores.push({artist: getFavoritesByVenueArtistId(venueUuid, artist)});
-    	});
+	   return console.log("Error");
     }
-    return artistScores;
+
+    const data =  await Promise.all(artists.map((artist) => getFavoritesByVenueArtistId(venueUuid, artist)))
+    return data.map((artist) => ({ artist }))
 }
 
 export async function getBestArtistForGig(gigUuid: string) {
@@ -93,7 +91,7 @@ export async function getBestArtistForGig(gigUuid: string) {
     	    artistScores.push({artist: getFavoritesByGigArtistId(gigUuid, artist)});
     	});
     }
-    return artistScores;
+    return await artistScores;
 }
 
 export async function  addFavorite(favorite: Saveable<Favorite>) {
@@ -114,7 +112,7 @@ async function topUserArtists(spotifyToken: string) {
         const responseJson = await response.json()
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
 
-        return items
+        return await items
     } catch (err) {
         console.log(err);
     }
