@@ -43,6 +43,10 @@ This project uses a MySQL Database. To run the database on your local machine, f
 }
 ```
 
+### DAtabase Design
+
+![Alt text](DB_ERD.drawio.png)
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
