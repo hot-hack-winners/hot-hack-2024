@@ -32,7 +32,7 @@ export async function getArtistPopularity(spotifyArtistId: string) {
         'SELECT popularity FROM artists WHERE spotify_id=?',
         [spotifyArtistId]
     )
-    return response[0].popularity
+    return response[0].popularity as number;
 }
 
 export async function addArtist(artist: Saveable<Artist>) {

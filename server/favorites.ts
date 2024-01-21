@@ -24,27 +24,26 @@ export type Favorite = z.infer<typeof favoritesSchema>
 
 export async function getFavoritesByVenueArtistId(venuesUuid: string, spotifyArtistId: string) {
     const favourites = await executeQuery<Favorite[]>(
-        `SELECT * FROM favourites 
+        `SELECT * FROM favourites
         WHERE venues_uuid = ?
             AND spotify_artists_id = ?`,
         [venuesUuid, spotifyArtistId]
     );
+    if ('error' in favourites) {
+	    console.log("error");
+
+        return 0;
+    }
+
     const popularity: number = await getArtistPopularity(spotifyArtistId);
     const weight: number = 100 - Math.pow(popularity - 50, 2) / 30;
-    let score: number = 0;
-    if ('error' in favourites) {
-	console.log("error");
-    } else {
-	favourites.forEach((favourite:any) => {
-    	    score += (Date.now() - favourite.timestamp)/favourite.rank;
-    	});
-    }
-    return await score * weight;
+
+    return favourites.reduce((score, favourite) => score + (Date.now() - new Date(favourite.timestamp).getTime()) / Number(favourite.ranking), 0) * weight;
 }
 
 export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId: string) {
     const favourites = await executeQuery<Favorite[]>(
-        `SELECT * FROM favourites 
+        `SELECT * FROM favourites
         WHERE gigs_uuid = ?
             AND spotify_artists_id = ?`,
         [gigUuid, spotifyArtistId]
@@ -63,17 +62,17 @@ export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId
 }
 
 export async function getBestArtistForVenue(venueUuid: string) {
-    const artists = await executeQuery<[]>(
-	`SELECT DISTINCT spotify_artists_id FROM favourites
-	WHERE venues_uuid = ?`,
-	[venueUuid]
+    const artists = await executeQuery<{ artist_id: string }[]>(
+        `SELECT DISTINCT spotify_artists_id as artist_id FROM favourites
+        WHERE venues_uuid = ?`,
+        [venueUuid]
     );
-    
+
     if ('error' in artists) {
 	   return console.log("Error");
     }
 
-    const data =  await Promise.all(artists.map((artist) => getFavoritesByVenueArtistId(venueUuid, artist)))
+    const data = await Promise.all(artists.map((artist) => getFavoritesByVenueArtistId(venueUuid, artist.artist_id)))
     return data.map((artist) => ({ artist }))
 }
 
@@ -143,7 +142,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
     const fucked = await currentGig[0]?.uuid;
     const fucked2 = await user[0]?.uuid;
 
-    
+
     const scan = {
         gigs_uuid: fucked, attendees_uuid: fucked2, timestamp: current_time, venues_uuid: venue_uuid
     }
