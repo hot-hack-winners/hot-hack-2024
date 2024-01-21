@@ -78,10 +78,11 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
 
 
     const fucked = await currentGig[0]?.uuid;
+    const fucked2 = await user[0]?.uuid;
 
     
     const scan = {
-        gigs_uuid: fucked, attendees_uuid: user[0].uuid, timestamp: current_time, venues_uuid: venue_uuid
+        gigs_uuid: fucked, attendees_uuid: fucked2, timestamp: current_time, venues_uuid: venue_uuid
     }
     console.log(scan)
     await addScan(scan)
