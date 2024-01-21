@@ -1,3 +1,4 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 
@@ -19,15 +20,13 @@ export async function getAllOrganisations() {
 }
 
 export async function getOrganisationByID(organisationId: string) {
-    const data = executeQuery<Organisation>(
+    return await executeQuery<Organisation>(
         'SELECT * FROM organisations where uuid = ?;',
         [organisationId]
     )
-    return await data
 }
 
 export async function addOrgnisation(organisation: Organisation) {
-
     return await executeQuery(
         'INSERT INTO organisations (uuid, name, ABN) VALUES(uuid(), ?, ?)',
         [organisation.name, organisation.ABN]
