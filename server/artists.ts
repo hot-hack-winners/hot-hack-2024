@@ -46,7 +46,12 @@ export async function getArtistPopularity(spotifyArtistId: string) {
 
 export async function addArtist(artist: Saveable<Artist>) {
     return await executeQuery(
-        'INSERT OR UPDATE INTO artists (uuid, name, spotify_id, popularity) VALUES(uuid(), ?, ?, ?)',
+        `INSERT INTO artists (uuid, name, spotify_id, popularity)
+        VALUES (UUID(), ?, ?, ?) as artist
+        ON DUPLICATE KEY UPDATE 
+            name = VALUES(name), 
+            spotify_id = VALUES(spotify_id), 
+            popularity = VALUES(popularity);`,
         [artist.name, artist.spotify_id, artist.popularity]
     )
 
