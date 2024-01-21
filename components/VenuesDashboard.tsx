@@ -74,6 +74,8 @@ export default function VenuesDashboard() {
       
       <div className="flex-grow flex p-8 space-x-8">
         <div className="flex-auto px-4 py-8 max-h-full rounded-md border border-gray-800 overflow-auto">
+        <div>All Artists </div>
+
           {artists.slice(0, 30).map((artist) => (
             <Card key={artist.uuid}>
               <div>{artist.name}</div>
