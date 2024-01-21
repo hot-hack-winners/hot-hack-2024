@@ -31,7 +31,7 @@ export default function VenuesDashboard() {
 
   const [artists, setArtists] = useState<Artist[]>([]);
   const [scans, setScans] = useState<Scan[]>([]);
-  const [bestArtists, setbestArtists ] = useState<Favorite[]>([]);
+  const [bestArtists, setbestArtists ] = useState<any[]>([]);
 
   useEffect(() => {
     getAllArtists()
