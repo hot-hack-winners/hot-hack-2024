@@ -58,9 +58,25 @@ export default function VenuesDashboard() {
         return;
       }
       setbestArtists(data);
+
       console.log(data)
     });
   }, []);
+
+  const formatScore = (score) => {
+    return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(score);
+  };
+  const scaleScore = (score, maxScore) => {
+    return Math.round((score / maxScore) * 100);
+  };
+
+  
+  const maxScore = Math.max(...bestArtists.map(artist => artist.score));
+
+  // Sort the artists by scaled score in descending order
+  const sortedBestArtists = bestArtists.sort((a, b) => 
+    scaleScore(b.score, maxScore) - scaleScore(a.score, maxScore)
+  );
 
   return (
     <div className="h-full w-full flex flex-col rounded-md border border-gray-500">
@@ -73,23 +89,16 @@ export default function VenuesDashboard() {
       </div>
       
       <div className="flex-grow flex p-8 space-x-8">
-        <div className="flex-auto px-4 py-8 max-h-full rounded-md border border-gray-800 overflow-auto">
-        <div>All Artists </div>
-
-          {artists.slice(0, 30).map((artist) => (
-            <Card key={artist.uuid}>
-              <div>{artist.name}</div>
-            </Card>
-          ))}
-        </div>
         
         <div className="flex-auto px-4 py-8 max-h-full rounded-md border border-gray-800 overflow-auto">
-          <div>Best Artists</div>
-          {bestArtists.map((bestArtist) => (
-          <Card >
-          <div>{bestArtist.spotify_artists_id}</div>
-        </Card>
-          
+          <div className="text-2xl font-semibold mb-4">Best Artists by Rankings</div>
+          {sortedBestArtists.map((bestArtist) => (
+            <Card key={bestArtist.artist.name} className="mb-4">
+              <div className="flex items-center justify-between">
+                <div className="text-lg font-medium">{bestArtist.artist.name}</div>
+                <div className="text-sm font-light">Score: {scaleScore(bestArtist.score, maxScore)}</div>
+              </div>
+            </Card>
           ))}
         </div>
         
@@ -99,4 +108,5 @@ export default function VenuesDashboard() {
       </div>
     </div>
   );
+
 }
