@@ -42,3 +42,14 @@ export async function addArtist(artist: Saveable<Artist>) {
     )
 
 }
+
+export async function getFavoriteTotals(attendee_uuid: string) {
+    const data = await executeQuery(
+        `SELECT f.spotify_artists_id, COUNT(DISTINCT f.attendees_uuid) as count, a.name
+        FROM favourites f
+        JOIN artists a ON f.spotify_artists_id = a.spotify_id
+        WHERE f.attendees_uuid = ?
+        GROUP BY f.spotify_artists_id, a.name;`, [attendee_uuid]
+    )
+    return data;
+}
