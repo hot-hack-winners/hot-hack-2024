@@ -50,7 +50,7 @@ export async function beginLogin() {
     code_challenge_method: 'S256',
     code_challenge: await generateCodeChallenge(code_verifier),
     state: state,
-    scope: 'user-read-private playlist-modify-private',
+    scope: 'user-top-read user-read-private playlist-modify-public playlist-modify-private',
   })
 
   sessionStorage.setItem('code_verifier', code_verifier)
