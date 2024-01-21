@@ -31,7 +31,7 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
       // Define newAttendee and newScan objects here...
       try {
         // Now for the scan
-        const scanResult = await submitScan(venueid, token.access_token);
+        const scanResult = await submitScan(user.id, venueid, token.access_token);
         console.log('Scan Result:', scanResult);
       } catch (error) {
         console.error('Error in processing:', error);
