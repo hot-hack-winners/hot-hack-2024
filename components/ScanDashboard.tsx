@@ -95,6 +95,7 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+            /*<p>{JSON.stringify(topArtists)}</p>*/
 
   return (
     <div>
@@ -126,7 +127,6 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
             >
               Logout
             </button>            
-            <p>{JSON.stringify(topArtists)}</p>
           </>
         )}
       </main>
