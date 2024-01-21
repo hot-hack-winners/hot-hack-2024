@@ -19,3 +19,8 @@ export async function authenticate(formData: any) {
 export async function checkCookie(){
   return cookies().get("admin");
 }
+
+export async function logout() {
+  cookies().delete("admin")
+  return undefined;
+}
