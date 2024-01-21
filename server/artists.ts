@@ -13,14 +13,18 @@ const artistSchema = z.object(
 export type Artist = z.infer<typeof artistSchema>
 
 export async function getAllArtists() {
-    return executeQuery<Artist[]>(
+    const test =  await executeQuery<Artist[]>(
         'SELECT * FROM artists',
         []
     )
+
+    console.log(test)
+
+    return test
 }
 
 export async function getArtistByID(artistId: string) {
-    const data = executeQuery<Artist>(
+    const data = await executeQuery<Artist>(
         'SELECT * FROM artists where uuid = ?;',
         [artistId]
     )
@@ -28,7 +32,7 @@ export async function getArtistByID(artistId: string) {
 }
 
 export async function addArtist(artist: Artist) {
-    return executeQuery(
+    return  await executeQuery(
         'INSERT INTO artists (uuid, name, spotify_id) VALUES(uuid(), ?, ?)',
         [artist.name, artist.spotify_id]
     )

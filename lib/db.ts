@@ -17,7 +17,7 @@ export default async function executeQuery<T>(query: string, values: any[]) {
 
         await db.end();
 
-        return results as T;
+        return JSON.parse(JSON.stringify(results)) as T;
     } catch (error) {
         return { error };
     }

@@ -25,11 +25,7 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
     if (!loggedOut){
-      () async => {
-        const  test =  await getAllArtists()
-        console.log(test)
-  
-      }
+        const  test =  getAllArtists().then(console.log)
 
     }
   
