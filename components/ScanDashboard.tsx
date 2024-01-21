@@ -24,10 +24,15 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
-    if (!loggedOut)
-     const test = getAllArtists().then(() => {}
-      
-     )
+    if (!loggedOut){
+      () async => {
+        const  test =  await getAllArtists()
+        console.log(test)
+  
+      }
+
+    }
+  
     
     
   }, [loggedOut, mutate])
