@@ -108,6 +108,44 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fullcalendar/bootstrap5@npm:^6.1.10":
+  version: 6.1.10
+  resolution: "@fullcalendar/bootstrap5@npm:6.1.10"
+  peerDependencies:
+    "@fullcalendar/core": ~6.1.10
+  checksum: d06999be49c7c1213de3abf67cf5f7a74d052971db1e25455c60bd2e654179ce263a78aad94071318e8e40f41b4d436205a6288f079ef17828840f1127290e69
+  languageName: node
+  linkType: hard
+
+"@fullcalendar/core@npm:^6.1.10":
+  version: 6.1.10
+  resolution: "@fullcalendar/core@npm:6.1.10"
+  dependencies:
+    preact: "npm:~10.12.1"
+  checksum: 0ca26aefd3e553dac9019838e46ab0e73f7df4954f4d2cbbda4ad73f4e8b9889e4a016cdcc7ae5f548d08d147d6315dffede51f8e213eff5ef63f2dcca2d759f
+  languageName: node
+  linkType: hard
+
+"@fullcalendar/daygrid@npm:^6.1.10":
+  version: 6.1.10
+  resolution: "@fullcalendar/daygrid@npm:6.1.10"
+  peerDependencies:
+    "@fullcalendar/core": ~6.1.10
+  checksum: 6c58038c1a5b6ba439f0b5d3fb9d53e7fabbf23039d18d6d60036acceee399cd1cbf6038d4b8973ee4c54544029fb940d29ff7d26472a332248e24a6e5969bf6
+  languageName: node
+  linkType: hard
+
+"@fullcalendar/react@npm:^6.1.10":
+  version: 6.1.10
+  resolution: "@fullcalendar/react@npm:6.1.10"
+  peerDependencies:
+    "@fullcalendar/core": ~6.1.10
+    react: ^16.7.0 || ^17 || ^18
+    react-dom: ^16.7.0 || ^17 || ^18
+  checksum: 9a46a60d0ff2e72af2d594e468f5bc15a4325a129df07033d8e5bb66f281343057b8c543242d9341883e1c2e4db1df14eda426babc5d8990f308d400af6bf0b9
+  languageName: node
+  linkType: hard
+
 "@hookform/resolvers@npm:^3.3.4":
   version: 3.3.4
   resolution: "@hookform/resolvers@npm:3.3.4"
@@ -195,6 +233,13 @@ __metadata:
     "@jridgewell/resolve-uri": "npm:^3.1.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
   checksum: 925dda0620887e5a24f11b5a3a106f4e8b1a66155b49be6ceee61432174df33a17c243d8a89b2cd79ccebd281d817878759236a2fc42c47325ae9f73dfbfb90d
+  languageName: node
+  linkType: hard
+
+"@kurkle/color@npm:^0.3.0":
+  version: 0.3.2
+  resolution: "@kurkle/color@npm:0.3.2"
+  checksum: 079c4b7688061070f1d570cee4cf0e7c4085867b940688ff80356a56825a5ace7077257c9ec5863eb344a8eae78379388ab57cdf9d75c491389fad56f411cd43
   languageName: node
   linkType: hard
 
@@ -702,6 +747,34 @@ __metadata:
     "@types/react-dom":
       optional: true
   checksum: bedb934ac07c710dc5550a7bfc7065d47e099d958cde1d37e4b1947ae5451f1b7e6f8ff5965e242578bf2c619065e6038c3a3aa779e5eafa7da3e3dbc685799f
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-scroll-area@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@radix-ui/react-scroll-area@npm:1.0.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.13.10"
+    "@radix-ui/number": "npm:1.0.1"
+    "@radix-ui/primitive": "npm:1.0.1"
+    "@radix-ui/react-compose-refs": "npm:1.0.1"
+    "@radix-ui/react-context": "npm:1.0.1"
+    "@radix-ui/react-direction": "npm:1.0.1"
+    "@radix-ui/react-presence": "npm:1.0.1"
+    "@radix-ui/react-primitive": "npm:1.0.3"
+    "@radix-ui/react-use-callback-ref": "npm:1.0.1"
+    "@radix-ui/react-use-layout-effect": "npm:1.0.1"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0
+    react-dom: ^16.8 || ^17.0 || ^18.0
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 2cea332ea7f05d77f68acb2b25b79092dfdaa476f6d69edac11ff6a1fec78988d9143bd2031a3bb8157f65ea08a34b8e5647f2064cf5eb13740eca1f7545482b
   languageName: node
   linkType: hard
 
@@ -1580,6 +1653,15 @@ __metadata:
     ansi-styles: "npm:^4.1.0"
     supports-color: "npm:^7.1.0"
   checksum: cb3f3e594913d63b1814d7ca7c9bafbf895f75fbf93b92991980610dfd7b48500af4e3a5d4e3a8f337990a96b168d7eb84ee55efdce965e2ee8efc20f8c8f139
+  languageName: node
+  linkType: hard
+
+"chart.js@npm:^4.4.1":
+  version: 4.4.1
+  resolution: "chart.js@npm:4.4.1"
+  dependencies:
+    "@kurkle/color": "npm:^0.3.0"
+  checksum: bb58247349ed04b6a38c4c4b45d953d87dab40ecd70dd796da302cbcebf866dfc1ecf7bd32d95ecb44b89dccf9a4cfc6ff84f74ba69b024be9b5bd19b2930fbc
   languageName: node
   linkType: hard
 
@@ -2795,10 +2877,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "hot-hack-2024@workspace:."
   dependencies:
+    "@fullcalendar/bootstrap5": "npm:^6.1.10"
+    "@fullcalendar/core": "npm:^6.1.10"
+    "@fullcalendar/daygrid": "npm:^6.1.10"
+    "@fullcalendar/react": "npm:^6.1.10"
     "@hookform/resolvers": "npm:^3.3.4"
     "@radix-ui/react-checkbox": "npm:^1.0.4"
     "@radix-ui/react-dialog": "npm:^1.0.5"
     "@radix-ui/react-label": "npm:^2.0.2"
+    "@radix-ui/react-scroll-area": "npm:^1.0.5"
     "@radix-ui/react-select": "npm:^2.0.0"
     "@radix-ui/react-slot": "npm:^1.0.2"
     "@radix-ui/react-toast": "npm:^1.1.5"
@@ -2810,6 +2897,7 @@ __metadata:
     autoprefixer: "npm:^10.4.17"
     axios: "npm:^1.6.5"
     bcrypt: "npm:^5.1.1"
+    chart.js: "npm:^4.4.1"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.0"
     date-fns: "npm:^3.3.0"
@@ -2822,6 +2910,7 @@ __metadata:
     qrcode: "npm:^1.5.3"
     querystring: "npm:^0.2.1"
     react: "npm:^18"
+    react-chartjs-2: "npm:^5.2.0"
     react-day-picker: "npm:^8.10.0"
     react-dom: "npm:^18"
     react-hook-form: "npm:^7.49.3"
@@ -4189,6 +4278,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"preact@npm:~10.12.1":
+  version: 10.12.1
+  resolution: "preact@npm:10.12.1"
+  checksum: 412bbe8eae0c73e8b30f4992a1bfe965460ea724b5bce1ebfb2dabf2d1a8dee2894b893ecd4e7cb2039f43d8a63d06af4508a606ca3baac17a01ac38e263efd4
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -4270,6 +4366,16 @@ __metadata:
   version: 1.2.3
   resolution: "queue-microtask@npm:1.2.3"
   checksum: 72900df0616e473e824202113c3df6abae59150dfb73ed13273503127235320e9c8ca4aaaaccfd58cf417c6ca92a6e68ee9a5c3182886ae949a768639b388a7b
+  languageName: node
+  linkType: hard
+
+"react-chartjs-2@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "react-chartjs-2@npm:5.2.0"
+  peerDependencies:
+    chart.js: ^4.1.1
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 0a70b60e1a0d1f0cecdd69d70d9ac1c191618c1033d8f942d4728f5eb84c893c82c9e3318be8a3158eb3a7186c0251a8fe0356c9610ea0f0f3f2d4a9c4a0b388
   languageName: node
   linkType: hard
 
