@@ -21,13 +21,14 @@ const favoritesSchema = z.object(
 
 export type Favorite = z.infer<typeof favoritesSchema>
 
-export function getAllAttendees() {
+export function getFavoritesByVenueArtistId(venues_uuid: string, spotify_artists_id: string) {
     return executeQuery<Favorite[]>(
-        'SELECT * FROM favorites',
-        []
+        `SELECT * FROM favourites 
+        WHERE venues_uuid = ?
+            AND spotify_artists_id = ?`,
+        [venues_uuid, spotify_artists_id]
     )
 }
-
 
 export function addFavorite(favorite: Saveable<Favorite>) {
     return executeQuery(
@@ -45,9 +46,8 @@ async function topUserArtists(spotifyToken: string) {
                 }
             })
         const responseJson = await response.json()
-        // console.log(responseJson)
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
-        // console.log(items)
+
         return items
     } catch (err) {
         console.log(err);
@@ -78,7 +78,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
     const scan = {
         gigs_uuid: currentGig[0].uuid, attendees_uuid: user[0].uuid, timestamp: current_time, venues_uuid: venue_uuid
     }
-    console.log(scan)
+
     await addScan(scan)
 
     // Add user favorites
@@ -92,7 +92,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
             venues_uuid: venue[0].uuid,
         }
         try {
-            await addArtist({ name: artist.name, spotify_id: artist.id })
+            await addArtist({ name: artist.name, spotify_id: artist.id, popularity: artist.popularity })
         } catch (error) {
             // if error occurs, continue function. Currently intended to catch duplicate entries in the artists table
             console.log(error)
@@ -104,8 +104,6 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
     return { user_uuid: user[0].uuid };
 }
 
-//     return executeQuery(
-//         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
-//         [attendee.spotify_id, attendee.name, attendee.email]
-//     )
-// }
+export async function favouritesSummary() {
+
+}
