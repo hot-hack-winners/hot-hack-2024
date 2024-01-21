@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt';
 
 const attendeeSchema = z.object(
     {
-        uuid: z.string().optional(),
-        spotify_id: z.string().optional(),
+        uuid: z.string(),
+        spotify_id: z.string(),
         name: z.string(),
         email: z.string(),
     }
@@ -25,7 +25,7 @@ export async function attendeeExists(identifier: string) {
         'SELECT * FROM attendees WHERE email = ? OR spotify_id = ?',
         [identifier, identifier]
     );
-    return result.length > 0;
+    return !('error' in result) && result.length > 0;
 }
 
 
@@ -50,7 +50,7 @@ export async function addAttendee(attendee: Saveable<Attendee>) {
     )
 }
 
-export async function addAttendeeIfNotExists(attendee: Attendee) {
+export async function addAttendeeIfNotExists(attendee: Saveable<Attendee>) {
     // Check if attendee already exists
     const exists = await attendeeExists(attendee.email); // You can use email or spotify_id as the identifier
     if (!exists) {
