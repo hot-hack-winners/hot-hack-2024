@@ -1,10 +1,11 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 
 const attendeeSchema = z.object(
     {
-        uuid: z.string(),
+        uuid: z.string().optional(),
         spotify_id: z.string().optional(),
         name: z.string(),
         email: z.string(),
@@ -13,24 +14,22 @@ const attendeeSchema = z.object(
 
 export type Attendee = z.infer<typeof attendeeSchema>
 
-export function getAllAttendees() {
-    return executeQuery<Attendee[]>(
+export async function getAllAttendees() {
+    return await executeQuery<Attendee[]>(
         'SELECT * FROM attendees',
         []
     )
 }
 
-export function getAttendeeByID(attendeeId: string) {
-    const data = executeQuery<Attendee>(
+export async function getAttendeeByID(attendeeId: string) {
+    return await executeQuery<Attendee>(
         'SELECT * FROM attendees where uuid = ?;',
         [attendeeId]
     )
-    return data
 }
 
-export function addAttendee(attendee: Saveable<Attendee>) {
-    const saltRounds: number = 10;
-    return executeQuery(
+export async function addAttendee(attendee: Attendee) {
+    return await executeQuery(
         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
         [attendee.spotify_id, attendee.name, attendee.email]
     )

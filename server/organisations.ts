@@ -1,9 +1,10 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 
 const organisationSchema = z.object(
     {
-        uuid: z.string(),
+        uuid: z.string().optional(),
         name: z.string(),
         ABN: z.string(),
     }
@@ -11,24 +12,22 @@ const organisationSchema = z.object(
 
 export type Organisation = z.infer<typeof organisationSchema>
 
-export function getAllOrganisations() {
-    return executeQuery<Organisation[]>(
+export async function getAllOrganisations() {
+    return await executeQuery<Organisation[]>(
         'SELECT * FROM organisations',
         []
     )
 }
 
-export function getOrganisationByID(organisationId: string) {
-    const data = executeQuery<Organisation>(
+export async function getOrganisationByID(organisationId: string) {
+    return await executeQuery<Organisation>(
         'SELECT * FROM organisations where uuid = ?;',
         [organisationId]
     )
-    return data
 }
 
-export function addOrgnisation(organisation: Saveable<Organisation>) {
-
-    return executeQuery(
+export async function addOrgnisation(organisation: Organisation) {
+    return await executeQuery(
         'INSERT INTO organisations (uuid, name, ABN) VALUES(uuid(), ?, ?)',
         [organisation.name, organisation.ABN]
     )

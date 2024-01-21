@@ -6,7 +6,8 @@ import { logout } from '../auth/spotify'
 import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
-import {addScan} from '@/server/addScan'
+
+import {addOrgnisation} from '@/server/organisations'
 interface ScanDashboardProps {
   playlistId: string
 }
@@ -23,6 +24,20 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
+    if (!loggedOut){
+
+      const organisationSchema = {
+            uuid: "4232",
+            name: "Jesse",
+            ABN: "1234432342",
+        }
+    
+        addOrgnisation(organisationSchema);
+
+    }
+  
+    
+    
   }, [loggedOut, mutate])
 
 
@@ -71,9 +86,9 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
                 router.push('/')
               }}
             >
-
               Logout
-            </button>
+            </button>            
+            <p>{JSON.stringify(topArtists)}</p>
           </>
         )}
       </main>

@@ -1,10 +1,11 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 
 const adminSchema = z.object(
     {
-        uuid: z.string(),
+        uuid: z.string().optional(),
         organisations_uuid: z.string(),
         name: z.string(),
         email: z.string(),
@@ -14,26 +15,26 @@ const adminSchema = z.object(
 
 export type Admin = z.infer<typeof adminSchema>
 
-export function getAllAdmins() {
-    return executeQuery<Admin[]>(
+export async function getAllAdmins() {
+    return await executeQuery<Admin[]>(
         'SELECT * FROM admins',
         []
     )
 }
 
-export function getAdminByID(adminId: string) {
-    const data = executeQuery<Admin>(
+export async function getAdminByID(adminId: string) {
+    const data = await executeQuery<Admin>(
         'SELECT * FROM admins where uuid = ?;',
         [adminId]
     )
     return data
 }
 
-export function registerAdmin(adminUser: Saveable<Admin>) {
+export async function registerAdmin(adminUser: Admin) {
     const saltRounds: number = 10;
-    bcrypt.genSalt(saltRounds, function (err, salt) {
-        bcrypt.hash(adminUser.password, salt, function (err, hash) {
-            return executeQuery(
+    bcrypt.genSalt(saltRounds, async function (err, salt) {
+        bcrypt.hash(adminUser.password, salt, async function (err, hash) {
+            return await executeQuery(
                 'INSERT INTO admins (uuid, organisations_uuid, name, email, password) VALUES(uuid(), ?, ?, ?, ?)',
                 [adminUser.organisations_uuid, adminUser.name, adminUser.email, hash]
             )
