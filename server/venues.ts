@@ -21,7 +21,7 @@ export async function getAllVenues() {
 }
 
 export async function getVenueByID(venueId: string) {
-    const data = await executeQuery<Venue>(
+    const data = await executeQuery<Venue[]>(
         'SELECT * FROM venues where uuid = ?;',
         [venueId]
     )

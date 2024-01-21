@@ -24,7 +24,7 @@ export async function getAllGigs() {
 // getCurrentVenueGig()
 export async function getCurrentVenueGig(venueId: string, currentTime: string) {
     // Current time need to be in ISO format, eg: 2024-01-19T12:00:00Z
-    const data = await executeQuery<Gig>(
+    const data = await executeQuery<Gig[]>(
         `SELECT * FROM gigs
         where venue_uuid = ?
             and ? >= start_time
@@ -37,7 +37,7 @@ export async function getCurrentVenueGig(venueId: string, currentTime: string) {
 
 
 export async function getGigByID(gigId: string) {
-    const data = await executeQuery<Gig>(
+    const data = await executeQuery<Gig[]>(
         'SELECT * FROM gigs where uuid = ?;',
         [gigId]
     )

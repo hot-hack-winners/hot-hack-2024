@@ -99,7 +99,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
         await addFavorite(favorite)
     }
 
-    return topArtists;
+    return { user_uuid: user[0].uuid };
 }
 
 //     return executeQuery(

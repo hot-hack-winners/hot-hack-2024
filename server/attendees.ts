@@ -22,14 +22,14 @@ export async function getAllAttendees() {
 }
 
 export async function getAttendeeByID(attendeeId: string) {
-    return await executeQuery<Attendee>(
+    return await executeQuery<Attendee[]>(
         'SELECT * FROM attendees where uuid = ?;',
         [attendeeId]
     )
 }
 
 export async function getAttendeeBySpotifyID(spotify_id: string) {
-    return await executeQuery<Attendee>(
+    return await executeQuery<Attendee[]>(
         'SELECT * FROM attendees where spotify_id = ?;',
         [spotify_id]
     )
