@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { getAttendeeByID, getAttendeeBySpotifyID } from "./attendees";
 import { getVenueByID } from "./venues";
 import { getCurrentVenueGig } from "./gigs";
-import { addArtist, getArtistPopularity } from "./artists";
+import { addArtist, getArtistBySpotifyID, getArtistPopularity } from "./artists";
 import { addScan } from "./scans";
 
 const  favoritesSchema = z.object(
@@ -73,7 +73,10 @@ export async function getBestArtistForVenue(venueUuid: string) {
     }
 
     const data = await Promise.all(artists.map((artist) => getFavoritesByVenueArtistId(venueUuid, artist.artist_id)))
-    return data.map((artist) => ({ artist }))
+    console.log(artists)
+    const artistData = await Promise.all(artists.map((artist) => getArtistBySpotifyID(artist.artist_id)))
+
+    return artists.map((artist, index) => ({ artist: artistData[index][0], score: data[index] })).sort((a, b) => b.score - a.score);
 }
 
 export async function getBestArtistForGig(gigUuid: string) {

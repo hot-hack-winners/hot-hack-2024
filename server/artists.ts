@@ -27,6 +27,15 @@ export async function getArtistByID(artistId: string) {
     )
 }
 
+
+export async function getArtistBySpotifyID(artistId: string) {
+    return await executeQuery<Artist>(
+        'SELECT * FROM artists where spotify_id = ?;',
+        [artistId]
+    )
+}
+
+
 export async function getArtistPopularity(spotifyArtistId: string) {
     const response = await executeQuery<any>(
         'SELECT popularity FROM artists WHERE spotify_id=?',
