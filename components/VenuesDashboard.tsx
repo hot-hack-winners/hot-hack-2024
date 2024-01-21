@@ -25,20 +25,37 @@ export default function VenuesDashboard() {
   const [artists, setArtists] = useState<Artist[]>([]);
   const [scans, setScans] = useState<Scan[]>([]);
   const [gigs, setGigs] = useState<Gig[]>([]);
-
   useEffect(() => {
-    getAllArtists().then((data) => {
-      console.log(data)
-      setArtists(data);
-    });
-    getAllScans().then((data) => {
-      setScans(data);
-    });
-    getAllGigs().then((data) => {
-      setGigs(data);
-    });
-  }, []);
+    getAllArtists()
+      .then((data) => {
+        if ('error' in data) {
+          console.error(data.error);
+          return;
+        }
 
+        setArtists(data);
+      });
+
+    getAllScans()
+      .then((data) => {
+        if ('error' in data) {
+          console.error(data.error);
+          return;
+        }
+
+        setScans(data);
+      });
+
+    getAllGigs()
+      .then((data) => {
+        if ('error' in data) {
+          console.error(data.error);
+          return;
+        }
+
+        setGigs(data);
+      });
+  }, []);
 
 
 
