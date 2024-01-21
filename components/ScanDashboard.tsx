@@ -7,11 +7,13 @@ import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
-import {addOrgnisation} from '@/server/organisations'
+//import {submitScan} from '@/server/favourites'
+import {addAttendeeIfNotExists} from '@/server/attendees'
+
 interface ScanDashboardProps {
   playlistId: string
 }
-export function ScanDashboard({ playlistId }: ScanDashboardProps) {
+export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
   const [isPressed, setIsPressed] =  useState(false)
   const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId);
   const router = useRouter()
@@ -24,21 +26,42 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
-    if (!loggedOut){
+    if (!loggedOut && user){
+      
 
-      const organisationSchema = {
-            uuid: "4232",
-            name: "Jesse",
-            ABN: "1234432342",
-        }
-    
-        addOrgnisation(organisationSchema);
+      const tokenSet = localStorage.getItem('tokenSet');
+      const token = JSON.parse(tokenSet)
+      // Assuming the user object has the necessary properties
+      //console.log(token)
+      const attendee_uuid = "1"; 
+      const venue_uuid = venueuid; 
+      const spotify_token = token.access_token; 
+      const current_time = new Date().toISOString(); 
+      
+      const newAttendee = {
+        // Assuming 'uuid' and 'spotify_id' are optional
+        name: user.display_name,              // Replace with actual attendee name
+        email: 'fake@fake.com',  
+         spotify_id: user.id
+    };
 
+        // Attempt to add the new attendee
+        const result = addAttendeeIfNotExists(newAttendee);
+        console.log('Result:', result);
+      
+     /* submitScan(attendee_uuid, venue_uuid, spotify_token, current_time)
+        .then(topArtists => {
+          console.log('Scan submitted successfully. Top Artists:', topArtists);
+        })
+        .catch(error => {
+          console.error('Error submitting scan:', error);
+        });
+*/
     }
   
     
     
-  }, [loggedOut, mutate])
+  }, [loggedOut, user, mutate])
 
 
 

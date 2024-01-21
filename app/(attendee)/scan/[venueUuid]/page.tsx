@@ -4,8 +4,8 @@ import {ScanDashboard} from '@/components/ScanDashboard'
 
 
 
-export default function Page() {
+export default function Page(props) {
 
 
-    return <ScanDashboard playlistId={'3cEYpjA9oz9GiPac4AsH4n'} />
+    return <ScanDashboard playlistId={'3cEYpjA9oz9GiPac4AsH4n'}  venueuid={props.params.venueUuid}/>
 }
