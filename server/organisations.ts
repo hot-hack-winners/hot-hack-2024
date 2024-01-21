@@ -11,24 +11,24 @@ const organisationSchema = z.object(
 
 export type Organisation = z.infer<typeof organisationSchema>
 
-export function getAllOrganisations() {
-    return executeQuery<Organisation[]>(
+export async function getAllOrganisations() {
+    return await executeQuery<Organisation[]>(
         'SELECT * FROM organisations',
         []
     )
 }
 
-export function getOrganisationByID(organisationId: string) {
+export async function getOrganisationByID(organisationId: string) {
     const data = executeQuery<Organisation>(
         'SELECT * FROM organisations where uuid = ?;',
         [organisationId]
     )
-    return data
+    return await data
 }
 
-export function addOrgnisation(organisation: Organisation) {
+export async function addOrgnisation(organisation: Organisation) {
 
-    return executeQuery(
+    return await executeQuery(
         'INSERT INTO organisations (uuid, name, ABN) VALUES(uuid(), ?, ?)',
         [organisation.name, organisation.ABN]
     )

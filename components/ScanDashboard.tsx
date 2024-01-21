@@ -7,7 +7,7 @@ import useTopArtists from '../auth/useTopArtists'
 import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
-import {getAllArtists} from '@/server/artists'
+import {addOrgnisation} from '@/server/organisations'
 interface ScanDashboardProps {
   playlistId: string
 }
@@ -25,7 +25,14 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
     if (!loggedOut){
-        const  test =  getAllArtists().then(console.log)
+
+      const organisationSchema = {
+            uuid: "4232",
+            name: "Jesse",
+            ABN: "1234432342",
+        }
+    
+        addOrgnisation(organisationSchema);
 
     }
   
