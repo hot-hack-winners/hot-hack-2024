@@ -20,10 +20,6 @@ export default function Page() {
     </div>
     
 
-<div>
-    <InsightsDashboard/>
-
-    </div>
     </div>
     
     )
