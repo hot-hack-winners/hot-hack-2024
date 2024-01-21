@@ -1,3 +1,4 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
@@ -7,7 +8,7 @@ import { getCurrentVenueGig } from "./gigs";
 import { addArtist } from "./artists";
 import { addScan } from "./scans";
 
-const favoritesSchema = z.object(
+const  favoritesSchema = z.object(
     {
         uuid: z.string(),
         spotify_artists_id: z.string().optional(),
@@ -21,16 +22,16 @@ const favoritesSchema = z.object(
 
 export type Favorite = z.infer<typeof favoritesSchema>
 
-export function getAllAttendees() {
-    return executeQuery<Favorite[]>(
+export async function getAllAttendees() {
+    return await executeQuery<Favorite[]>(
         'SELECT * FROM favorites',
         []
     )
 }
 
 
-export function addFavorite(favorite: Saveable<Favorite>) {
-    return executeQuery(
+export async function  addFavorite(favorite: Saveable<Favorite>) {
+    return await executeQuery(
         'INSERT INTO favourites (uuid, spotify_artists_id, gigs_uuid, attendees_uuid, ranking, timestamp, venues_uuid) VALUES(uuid(), ?, ?, ?, ?, ?, ?)',
         [favorite.spotify_artists_id, favorite.gigs_uuid, favorite.attendees_uuid, favorite.ranking, favorite.timestamp, favorite.venues_uuid]
     )
@@ -48,7 +49,7 @@ async function topUserArtists(spotifyToken: string) {
         console.log(responseJson)
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
         // console.log(items)
-        return items
+        return  await items
     } catch (err) {
         console.log(err);
     }

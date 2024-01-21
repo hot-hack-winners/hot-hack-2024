@@ -8,7 +8,6 @@ import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
 import {addAttendeeIfNotExists} from '@/server/attendees'
-import {addScan, Scan} from '@/server/scans'
 import {submitScan} from '@/server/favorites'
 
 interface ScanDashboardProps {
@@ -29,13 +28,10 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
     const token = JSON.parse(tokenSet)
 
       // Define newAttendee and newScan objects here...
-      try {
+
         // Now for the scan
-        const scanResult = await submitScan(user.id, venueid, token.access_token);
+        const scanResult = await submitScan(user.id, venueuid, token.access_token);
         console.log('Scan Result:', scanResult);
-      } catch (error) {
-        console.error('Error in processing:', error);
-      }
     }
   
 
@@ -57,10 +53,7 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
     };
         // Attempt to add the new attendee
         const result = addAttendeeIfNotExists(newAttendee);
-        console.log('Result:', result);
-
-     
-  
+        //console.log('Result:', result)
 
         handleScans();
         // submitscan stuff
