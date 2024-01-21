@@ -31,7 +31,7 @@ export async function getScanByID(scanId: string) {
 
 export async function addScan(scan: Scan) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
-    return await executeQuery(
+    return  executeQuery(
         'INSERT INTO scans (uuid, timestamp, attendees_uuid, gigs_uuid, venues_uuid) VALUES(uuid(), ?, ?, ?, ?)',
         [scan.timestamp, scan.attendees_uuid, scan.gigs_uuid, scan.venues_uuid]
     )
