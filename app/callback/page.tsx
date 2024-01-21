@@ -22,7 +22,7 @@ export default function Page() {
       })
       .catch((error) => {
         console.error(error)
-        router.replace('/')
+        //router.replace('/')
       })
     }, [])
 
