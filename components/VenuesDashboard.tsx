@@ -12,6 +12,7 @@ import { getAllArtists, Artist } from "@/server/artists";
 import { getAllScans, Scan } from "@/server/scans";
 import { getBestArtistForVenue, Favorite } from "@/server/favorites";
 
+type FavoriteWithScore = Favorite & { score: number };
 
 
 export default function VenuesDashboard() {
@@ -63,10 +64,11 @@ export default function VenuesDashboard() {
     });
   }, []);
 
-  const formatScore = (score) => {
+  const formatScore = (score: number): string => {
     return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(score);
   };
-  const scaleScore = (score, maxScore) => {
+
+  const scaleScore = (score: number, maxScore: number): number => {
     return Math.round((score / maxScore) * 100);
   };
 
