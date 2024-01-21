@@ -20,6 +20,29 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Database
+
+This project uses a MySQL Database. To run the database on your local machine, follow the steps below.
+
+1.  Ensure you have a MySQL server (https://dev.mysql.com/downloads/mysql/5.5.html?os=3&version=5) and MySQL Workbench (https://dev.mysql.com/downloads/workbench/) installed on your PC
+2.  You can set the MySQL server be accessible with `user: root` and `password: password` on `localhost:3306` or your own preferred credentials (Set during the installation phase of the server software).
+3.  Open MySQL Workbench and connect to the local database with the credentals set in the previous step.
+4.  Import the 'DatabaseSchema.sql' file from this repository by going to 'Server' -> 'Data Import'. (NOTE: Import from self contained file in the import options) This step will create the database schema and populate some test data.
+    ![Alt text](image.png)
+5.  Connect the application to your local database. Open the file `lib/db.ts` and change the config to:
+
+```json
+{
+  "config": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "hot-hack-2024",
+    "user": "root",
+    "password": "password"
+  }
+}
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
