@@ -1,6 +1,7 @@
 'use client'
 
 import VenuesDashboard from '@/components/VenuesDashboard'
+import Scheduler from '@/components/ui/scheduler'
 
 import { useTheme } from "next-themes"
 
@@ -9,5 +10,4 @@ export default function Page() {
     setTheme("dark")
 
     return <VenuesDashboard/>
-
 }

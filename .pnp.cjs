@@ -26,9 +26,14 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@fullcalendar/bootstrap5", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["@fullcalendar/daygrid", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/react", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
           ["@hookform/resolvers", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:3.3.4"],\
           ["@radix-ui/react-checkbox", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.4"],\
           ["@radix-ui/react-label", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.0.2"],\
+          ["@radix-ui/react-scroll-area", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.5"],\
           ["@radix-ui/react-select", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.0.0"],\
           ["@radix-ui/react-slot", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.2"],\
           ["@radix-ui/react-toast", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.1.5"],\
@@ -205,6 +210,90 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@floating-ui-utils-npm-0.2.1-5ad70234fc-33c9ab346e.zip/node_modules/@floating-ui/utils/",\
         "packageDependencies": [\
           ["@floating-ui/utils", "npm:0.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fullcalendar/bootstrap5", [\
+      ["npm:6.1.10", {\
+        "packageLocation": "./.yarn/cache/@fullcalendar-bootstrap5-npm-6.1.10-70ad258cef-d06999be49.zip/node_modules/@fullcalendar/bootstrap5/",\
+        "packageDependencies": [\
+          ["@fullcalendar/bootstrap5", "npm:6.1.10"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10", {\
+        "packageLocation": "./.yarn/__virtual__/@fullcalendar-bootstrap5-virtual-4829e02a18/0/cache/@fullcalendar-bootstrap5-npm-6.1.10-70ad258cef-d06999be49.zip/node_modules/@fullcalendar/bootstrap5/",\
+        "packageDependencies": [\
+          ["@fullcalendar/bootstrap5", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["@types/fullcalendar__core", null]\
+        ],\
+        "packagePeers": [\
+          "@fullcalendar/core",\
+          "@types/fullcalendar__core"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fullcalendar/core", [\
+      ["npm:6.1.10", {\
+        "packageLocation": "./.yarn/cache/@fullcalendar-core-npm-6.1.10-15efba3167-0ca26aefd3.zip/node_modules/@fullcalendar/core/",\
+        "packageDependencies": [\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["preact", "npm:10.12.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fullcalendar/daygrid", [\
+      ["npm:6.1.10", {\
+        "packageLocation": "./.yarn/cache/@fullcalendar-daygrid-npm-6.1.10-398fef213d-6c58038c1a.zip/node_modules/@fullcalendar/daygrid/",\
+        "packageDependencies": [\
+          ["@fullcalendar/daygrid", "npm:6.1.10"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10", {\
+        "packageLocation": "./.yarn/__virtual__/@fullcalendar-daygrid-virtual-21e221a449/0/cache/@fullcalendar-daygrid-npm-6.1.10-398fef213d-6c58038c1a.zip/node_modules/@fullcalendar/daygrid/",\
+        "packageDependencies": [\
+          ["@fullcalendar/daygrid", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["@types/fullcalendar__core", null]\
+        ],\
+        "packagePeers": [\
+          "@fullcalendar/core",\
+          "@types/fullcalendar__core"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@fullcalendar/react", [\
+      ["npm:6.1.10", {\
+        "packageLocation": "./.yarn/cache/@fullcalendar-react-npm-6.1.10-c16468a3a4-9a46a60d0f.zip/node_modules/@fullcalendar/react/",\
+        "packageDependencies": [\
+          ["@fullcalendar/react", "npm:6.1.10"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10", {\
+        "packageLocation": "./.yarn/__virtual__/@fullcalendar-react-virtual-c69cbddef4/0/cache/@fullcalendar-react-npm-6.1.10-c16468a3a4-9a46a60d0f.zip/node_modules/@fullcalendar/react/",\
+        "packageDependencies": [\
+          ["@fullcalendar/react", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["@types/fullcalendar__core", null],\
+          ["@types/react", "npm:18.2.48"],\
+          ["@types/react-dom", "npm:18.2.18"],\
+          ["react", "npm:18.2.0"],\
+          ["react-dom", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@fullcalendar/core",\
+          "@types/fullcalendar__core",\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -685,10 +774,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.1", {\
-        "packageLocation": "./.yarn/__virtual__/@radix-ui-react-direction-virtual-3692247e81/0/cache/@radix-ui-react-direction-npm-1.0.1-ab286e4395-5336a8b0d4.zip/node_modules/@radix-ui/react-direction/",\
+      ["virtual:168c006dd66e2fbe4e97fa460ef49e9cb4a1143fe462eba9fd86a9ed4e964445a1f4c824ee4aac5f5e63b1f175fd378fb18345923d8903a97f3666ab3406b525#npm:1.0.1", {\
+        "packageLocation": "./.yarn/__virtual__/@radix-ui-react-direction-virtual-4076a6d3de/0/cache/@radix-ui-react-direction-npm-1.0.1-ab286e4395-5336a8b0d4.zip/node_modules/@radix-ui/react-direction/",\
         "packageDependencies": [\
-          ["@radix-ui/react-direction", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.1"],\
+          ["@radix-ui/react-direction", "virtual:168c006dd66e2fbe4e97fa460ef49e9cb4a1143fe462eba9fd86a9ed4e964445a1f4c824ee4aac5f5e63b1f175fd378fb18345923d8903a97f3666ab3406b525#npm:1.0.1"],\
           ["@babel/runtime", "npm:7.23.8"],\
           ["@types/react", "npm:18.2.48"],\
           ["react", "npm:18.2.0"]\
@@ -959,6 +1048,42 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@radix-ui/react-scroll-area", [\
+      ["npm:1.0.5", {\
+        "packageLocation": "./.yarn/cache/@radix-ui-react-scroll-area-npm-1.0.5-05d3394998-2cea332ea7.zip/node_modules/@radix-ui/react-scroll-area/",\
+        "packageDependencies": [\
+          ["@radix-ui/react-scroll-area", "npm:1.0.5"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.5", {\
+        "packageLocation": "./.yarn/__virtual__/@radix-ui-react-scroll-area-virtual-168c006dd6/0/cache/@radix-ui-react-scroll-area-npm-1.0.5-05d3394998-2cea332ea7.zip/node_modules/@radix-ui/react-scroll-area/",\
+        "packageDependencies": [\
+          ["@radix-ui/react-scroll-area", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.5"],\
+          ["@babel/runtime", "npm:7.23.8"],\
+          ["@radix-ui/number", "npm:1.0.1"],\
+          ["@radix-ui/primitive", "npm:1.0.1"],\
+          ["@radix-ui/react-compose-refs", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.1"],\
+          ["@radix-ui/react-context", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.1"],\
+          ["@radix-ui/react-direction", "virtual:168c006dd66e2fbe4e97fa460ef49e9cb4a1143fe462eba9fd86a9ed4e964445a1f4c824ee4aac5f5e63b1f175fd378fb18345923d8903a97f3666ab3406b525#npm:1.0.1"],\
+          ["@radix-ui/react-presence", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.1"],\
+          ["@radix-ui/react-primitive", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.3"],\
+          ["@radix-ui/react-use-callback-ref", "virtual:9476e430a5ffe8c6c2ca9b8a60379a4dcc4d0cbd865b787942517ac0d38540dd0a79c6a2b0fd800d57c5d9331485fb4ad8c341a4d573abfef10e37a0da0fd711#npm:1.0.1"],\
+          ["@radix-ui/react-use-layout-effect", "virtual:bb79f8d18fa92535ee3bdaf12626566ba8140bd343ed0ed163a7778595b94980c99629fd59271846cfdb297bd091763a06c8cee86be52fa1bcff88a137a019fe#npm:1.0.1"],\
+          ["@types/react", "npm:18.2.48"],\
+          ["@types/react-dom", "npm:18.2.18"],\
+          ["react", "npm:18.2.0"],\
+          ["react-dom", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:18.2.0"]\
+        ],\
+        "packagePeers": [\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@radix-ui/react-select", [\
       ["npm:2.0.0", {\
         "packageLocation": "./.yarn/cache/@radix-ui-react-select-npm-2.0.0-9d9af2d26d-2c4c66b945.zip/node_modules/@radix-ui/react-select/",\
@@ -977,7 +1102,7 @@ const RAW_RUNTIME_STATE =
           ["@radix-ui/react-collection", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.3"],\
           ["@radix-ui/react-compose-refs", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.1"],\
           ["@radix-ui/react-context", "virtual:29d2b434146c5bd18fe5f43561995c5157491f5d135055d3337fab93a8db34abed22787b32dafb41a792ea6584f305c621df377aee20e763dff3b696ee29130c#npm:1.0.1"],\
-          ["@radix-ui/react-direction", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.1"],\
+          ["@radix-ui/react-direction", "virtual:168c006dd66e2fbe4e97fa460ef49e9cb4a1143fe462eba9fd86a9ed4e964445a1f4c824ee4aac5f5e63b1f175fd378fb18345923d8903a97f3666ab3406b525#npm:1.0.1"],\
           ["@radix-ui/react-dismissable-layer", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.5"],\
           ["@radix-ui/react-focus-guards", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.1"],\
           ["@radix-ui/react-focus-scope", "virtual:d0bbd2884b6e2950c3b1ce32bd267ab2dd8848cf9cf3c7402e2c279d475601470d0a32b83b891ff2f3acac5736637629ff05500f8252b1719e2d44f9331576a2#npm:1.0.4"],\
@@ -3491,9 +3616,14 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["hot-hack-2024", "workspace:."],\
+          ["@fullcalendar/bootstrap5", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/core", "npm:6.1.10"],\
+          ["@fullcalendar/daygrid", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
+          ["@fullcalendar/react", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:6.1.10"],\
           ["@hookform/resolvers", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:3.3.4"],\
           ["@radix-ui/react-checkbox", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.4"],\
           ["@radix-ui/react-label", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.0.2"],\
+          ["@radix-ui/react-scroll-area", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.5"],\
           ["@radix-ui/react-select", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:2.0.0"],\
           ["@radix-ui/react-slot", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.0.2"],\
           ["@radix-ui/react-toast", "virtual:89b3eb5a1da5e6c25d35f776b13ff3e12783c07972f1c553f6eb7377da0e59dc2b26f737b06cc1e4846f31e878a0bd61686370450a9fdb8a6e6032e2cd5abc0a#npm:1.1.5"],\
@@ -5089,6 +5219,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/postcss-value-parser-npm-4.2.0-3cef602a6a-e4e4486f33.zip/node_modules/postcss-value-parser/",\
         "packageDependencies": [\
           ["postcss-value-parser", "npm:4.2.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["preact", [\
+      ["npm:10.12.1", {\
+        "packageLocation": "./.yarn/cache/preact-npm-10.12.1-fdb903e9a5-412bbe8eae.zip/node_modules/preact/",\
+        "packageDependencies": [\
+          ["preact", "npm:10.12.1"]\
         ],\
         "linkType": "HARD"\
       }]\
