@@ -1,3 +1,4 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
@@ -13,25 +14,45 @@ const attendeeSchema = z.object(
 
 export type Attendee = z.infer<typeof attendeeSchema>
 
-export function getAllAttendees() {
-    return executeQuery<Attendee[]>(
+export async function getAllAttendees() {
+    return await executeQuery<Attendee[]>(
         'SELECT * FROM attendees',
         []
     )
 }
+export async function attendeeExists(identifier: string) {
+    const result = await executeQuery<Attendee[]>(
+        'SELECT * FROM attendees WHERE email = ? OR spotify_id = ?',
+        [identifier, identifier]
+    );
+    return result.length > 0;
+}
 
-export function getAttendeeByID(attendeeId: string) {
-    const data = executeQuery<Attendee>(
+
+export async function getAttendeeByID(attendeeId: string) {
+    return await executeQuery<Attendee>(
         'SELECT * FROM attendees where uuid = ?;',
         [attendeeId]
     )
-    return data
 }
 
-export function addAttendee(attendee: Attendee) {
-    const saltRounds: number = 10;
-    return executeQuery(
+export async function addAttendee(attendee: Attendee) {
+    return await executeQuery(
         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
         [attendee.spotify_id, attendee.name, attendee.email]
     )
+}
+
+export async function addAttendeeIfNotExists(attendee: Attendee) {
+    // Check if attendee already exists
+    const exists = await attendeeExists(attendee.email); // You can use email or spotify_id as the identifier
+    if (!exists) {
+        // Add the attendee if they don't exist
+        return await addAttendee(attendee);
+    } else {
+        // Attendee already exists
+        console.log('Attendee already exists');
+        // Optionally, return the existing attendee's details or a relevant message
+        return 'Attendee already exists';
+    }
 }

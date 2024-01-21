@@ -1,3 +1,4 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 
@@ -12,23 +13,23 @@ const venueSchema = z.object(
 
 export type Venue = z.infer<typeof venueSchema>
 
-export function getAllVenues() {
-    return executeQuery<Venue[]>(
+export async function getAllVenues() {
+    return await executeQuery<Venue[]>(
         'SELECT * FROM venues',
         []
     )
 }
 
-export function getVenueByID(venueId: string) {
-    const data = executeQuery<Venue>(
+export async function getVenueByID(venueId: string) {
+    const data = await executeQuery<Venue>(
         'SELECT * FROM venues where uuid = ?;',
         [venueId]
     )
     return data
 }
 
-export function addVenue(venue: Venue) {
-    return executeQuery(
+export async function addVenue(venue: Venue) {
+    return await executeQuery(
         'INSERT INTO venues (uuid, organisations_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
         [venue.organisations_uuid, venue.name, venue.address]
     )
