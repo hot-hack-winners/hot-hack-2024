@@ -52,7 +52,7 @@ export async function addAttendee(attendee: Saveable<Attendee>) {
 
 export async function addAttendeeIfNotExists(attendee: Saveable<Attendee>) {
     // Check if attendee already exists
-    const exists = await attendeeExists(attendee.email); // You can use email or spotify_id as the identifier
+    const exists = await attendeeExists(attendee.spotify_id); // You can use email or spotify_id as the identifier
     if (!exists) {
         // Add the attendee if they don't exist
         return await addAttendee(attendee);

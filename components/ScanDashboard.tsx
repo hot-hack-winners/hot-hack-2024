@@ -35,6 +35,20 @@ export function ScanDashboard({ playlistId, venueUuid }: ScanDashboardProps) {
     console.log('Scan Result:', scanResult);
   }
 
+  const handleAttendee = async () => {
+
+    const newAttendee = {
+      // Assuming 'uuid' and 'spotify_id' are optional
+      name: user.display_name,              // Replace with actual attendee name
+      email: 'fake@fake.com',
+      spotify_id: user.id
+  };
+      // Attempt to add the new attendee
+      const result = await addAttendeeIfNotExists(newAttendee);
+      console.log('Result:', result)
+
+  }
+
   useEffect(() => {
     if (loggedOut) {
       sessionStorage.setItem('preAuthUrl', window.location.href);
@@ -43,16 +57,7 @@ export function ScanDashboard({ playlistId, venueUuid }: ScanDashboardProps) {
     }
     if (!loggedOut && user){
 
-      const newAttendee = {
-        // Assuming 'uuid' and 'spotify_id' are optional
-        name: user.display_name,              // Replace with actual attendee name
-        email: 'fake@fake.com',
-        spotify_id: user.id
-    };
-        // Attempt to add the new attendee
-        const result = addAttendeeIfNotExists(newAttendee);
-        console.log('Result:', result)
-
+      handleAttendee();
         handleScans();
         // submitscan stuff
 
