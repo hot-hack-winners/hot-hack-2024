@@ -15,7 +15,6 @@ import { getAllScans, Scan } from "@/server/scans";
 import GigCard from "./GigCard";
 
 
-
 export default function VenuesDashboard() {
   const days: Date[] = [
     new Date("2024-01-20"),
@@ -29,6 +28,7 @@ export default function VenuesDashboard() {
 
   useEffect(() => {
     getAllArtists().then((data) => {
+      console.log(data)
       setArtists(data);
     });
     getAllScans().then((data) => {
@@ -37,52 +37,38 @@ export default function VenuesDashboard() {
     getAllGigs().then((data) => {
       setGigs(data);
     });
-
-
-
   }, []);
 
-  
+
+
+
   return (
-    <div className="p-20 bg-black h-screen w-full">
-      <div className="flex flex-col h-full w-full rounded-md border border-gray-500">
-        <div className="flex items-center justify-between p-8 border-b border-gray-700">
-          <h1 className="text-8xl font-bold text-white">Dashboard</h1>
-          <div>
-            <Button onClick={() => {}}>Gig Register</Button>
-            <Button onClick={logout}>Log Out</Button>
-          </div>
+    <div className="h-full w-full flex flex-col rounded-md border border-gray-500">
+      <div className="flex-none p-4 border-b border-gray-700">
+        <div className="text-8xl font-bold text-white">Dashboard</div>
+        <div className="flex space-x-4 mt-4">
+          <Button>Gig register</Button>
+          <Button onClick={logout}>Log out</Button>
+        </div>
+      </div>
+      
+      <div className="flex-grow flex p-8 space-x-8">
+        <div className="flex-auto px-4 py-8 max-h-full rounded-md border border-gray-800 overflow-auto">
+          {artists.slice(0, 30).map((artist) => (
+            <Card key={artist.uuid}>
+              <div>{artist.name}</div>
+            </Card>
+          ))}
         </div>
         
-        <div className="flex flex-grow p-8 space-x-8">
-          <ScrollArea className="flex flex-col basis-1/4">
-            <h2 className="text-lg font-semibold text-white mb-4">Artists</h2>
-            {artists.slice(0, 20).map((artist) => (
-              <Card key={artist.uuid} className="mb-4">
-                <div className="text-white">{artist.name}</div>
-              </Card>
-            ))}
-          </ScrollArea>
-
-          <ScrollArea className="flex flex-col basis-1/4">
-            <h2 className="text-lg font-semibold text-white mb-4">Scans</h2>
-            {scans.map((scan) => (
-              <Card key={scan.uuid} className="mb-4">
-                <div className="text-white">{scan.attendees_uuid}</div>
-              </Card>
-            ))}
-          </ScrollArea>
-
-          <ScrollArea className="flex flex-col basis-1/4">
-            <h2 className="text-lg font-semibold text-white mb-4">Gig List</h2>
-            {gigs.map((gig) => (
-              <GigCard key={gig.uuid} uuid={gig.venue_uuid} className="mb-4" />
-            ))}
-          </ScrollArea>
-
-          <div className="flex flex-col basis-1/4 p-4 rounded-md border border-gray-800">
-            <Scheduler />
-          </div>
+        <div className="flex-auto px-4 py-8 max-h-full rounded-md border border-gray-800 overflow-auto">
+          <div>Gig list</div>
+          {gigs.map((gig) => (
+            <GigCard key={gig.uuid} uuid={gig.venue_uuid}></GigCard>
+          ))}
+        </div>
+        <div className="flex-auto px-4 py-8 flex flex-col rounded-md border border-gray-800">
+          <Scheduler />
         </div>
       </div>
     </div>
