@@ -34,7 +34,7 @@ export default function LoginForm() {
             {
                 console.log(response)
                 if (response) {
-                    router.push("/test")
+                    router.push("/dashboard")
                 }
             }
             ))
