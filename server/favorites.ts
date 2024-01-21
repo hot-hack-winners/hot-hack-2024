@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import { getAttendeeByID, getAttendeeBySpotifyID } from "./attendees";
 import { getVenueByID } from "./venues";
 import { getCurrentVenueGig } from "./gigs";
-import { addArtist } from "./artists";
+import { addArtist, getArtistPopularity } from "./artists";
 import { addScan } from "./scans";
 
 const favoritesSchema = z.object(
@@ -21,13 +21,78 @@ const favoritesSchema = z.object(
 
 export type Favorite = z.infer<typeof favoritesSchema>
 
-export function getFavoritesByVenueArtistId(venues_uuid: string, spotify_artists_id: string) {
-    return executeQuery<Favorite[]>(
+export async function getFavoritesByVenueArtistId(venuesUuid: string, spotifyArtistId: string) {
+    const favourites = await executeQuery<Favorite[]>(
         `SELECT * FROM favourites 
         WHERE venues_uuid = ?
             AND spotify_artists_id = ?`,
-        [venues_uuid, spotify_artists_id]
-    )
+        [venuesUuid, spotifyArtistId]
+    );
+    const popularity: number = await getArtistPopularity(spotifyArtistId);
+    const weight: number = 100 - Math.pow(popularity - 50, 2) / 30;
+    let score: number = 0;
+    if ('error' in favourites) {
+	console.log("error");
+    } else {
+	favourites.forEach((favourite:any) => {
+    	    score += (Date.now() - favourite.timestamp)/favourite.rank;
+    	});
+    }
+    return score * weight;
+}
+
+export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId: string) {
+    const favourites = await executeQuery<Favorite[]>(
+        `SELECT * FROM favourites 
+        WHERE gigs_uuid = ?
+            AND spotify_artists_id = ?`,
+        [gigUuid, spotifyArtistId]
+    );
+    const popularity: number = await getArtistPopularity(spotifyArtistId);
+    const weight: number = 100 - Math.pow(popularity - 50, 2) / 30;
+    let score: number = 0;
+    if ('error' in favourites) {
+	console.log("error");
+    } else {
+	favourites.forEach((favourite:any) => {
+    	    score += (Date.now() - favourite.timestamp)/favourite.rank;
+    	});
+    }
+    return score * weight;
+}
+
+export async function getBestArtistForVenue(venueUuid: string) {
+    const artists = await executeQuery<[]>(
+	`SELECT DISTINCT spotify_artists_id FROM favourites
+	WHERE venues_uuid = ?`,
+	[venueUuid]
+    );
+    let artistScores: {}[] = [];
+    if ('error' in artists) {
+	console.log("Error");
+    } else {
+	artists.forEach((artist) => {
+    	    artistScores.push({artist: getFavoritesByVenueArtistId(venueUuid, artist)});
+    	});
+    }
+    return artistScores;
+}
+
+export async function getBestArtistForGig(gigUuid: string) {
+    const artists = await executeQuery<[]>(
+	`SELECT DISTINCT spotify_artists_id FROM favourites
+	WHERE gigs_uuid = ?`,
+	[gigUuid]
+    );
+    let artistScores: {}[] = [];
+    if ('error' in artists) {
+	console.log("Error");
+    } else {
+	artists.forEach((artist) => {
+    	    artistScores.push({artist: getFavoritesByGigArtistId(gigUuid, artist)});
+    	});
+    }
+    return artistScores;
 }
 
 export function addFavorite(favorite: Saveable<Favorite>) {
