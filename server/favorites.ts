@@ -106,7 +106,7 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
 
         await addFavorite(favorite)
     }
-    const returnFucked = await user[0].uuid ;
+    const returnFucked = await user[0]?.uuid ;
     return { user_uuid: returnFucked };
 }
 
