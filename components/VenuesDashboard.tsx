@@ -29,9 +29,11 @@ export default function VenuesDashboard() {
     return data;
   }
 
+  
+
   const [artists, setArtists] = useState<Artist[]>([]);
   const [scans, setScans] = useState<Scan[]>([]);
-  const [bestArtists, setbestArtists ] = useState<any[]>([]);
+  const [bestArtists, setbestArtists ] = useState<{artist:any,score:number}[]>([]);
 
   useEffect(() => {
     getAllArtists()
@@ -55,14 +57,14 @@ export default function VenuesDashboard() {
     test()
     .then((data) =>  {
       if (data){
-        if ('error' in data) {
-          console.error(data.error);
-          return;
-        }
-        setbestArtists(data);
-  
-        console.log(data)
-  
+      if ('error' in data) {
+        console.error(data.error);
+        return;
+      }
+      setbestArtists(data);
+
+      console.log(data)
+
       }
     });
   }, []);
