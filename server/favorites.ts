@@ -1,3 +1,4 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
@@ -7,7 +8,7 @@ import { getCurrentVenueGig } from "./gigs";
 import { addArtist, getArtistPopularity } from "./artists";
 import { addScan } from "./scans";
 
-const favoritesSchema = z.object(
+const  favoritesSchema = z.object(
     {
         uuid: z.string(),
         spotify_artists_id: z.string().optional(),
@@ -95,8 +96,8 @@ export async function getBestArtistForGig(gigUuid: string) {
     return artistScores;
 }
 
-export function addFavorite(favorite: Saveable<Favorite>) {
-    return executeQuery(
+export async function  addFavorite(favorite: Saveable<Favorite>) {
+    return await executeQuery(
         'INSERT INTO favourites (uuid, spotify_artists_id, gigs_uuid, attendees_uuid, ranking, timestamp, venues_uuid) VALUES(uuid(), ?, ?, ?, ?, ?, ?)',
         [favorite.spotify_artists_id, favorite.gigs_uuid, favorite.attendees_uuid, favorite.ranking, favorite.timestamp, favorite.venues_uuid]
     )
@@ -140,8 +141,13 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
         return Promise.reject();
     }
 
+
+    const fucked = await currentGig[0]?.uuid;
+    const fucked2 = await user[0]?.uuid;
+
+    
     const scan = {
-        gigs_uuid: currentGig[0].uuid, attendees_uuid: user[0].uuid, timestamp: current_time, venues_uuid: venue_uuid
+        gigs_uuid: fucked, attendees_uuid: fucked2, timestamp: current_time, venues_uuid: venue_uuid
     }
 
     await addScan(scan)
@@ -165,8 +171,8 @@ export async function submitScan(spotify_user_id: string, venue_uuid: string, sp
 
         await addFavorite(favorite)
     }
-
-    return { user_uuid: user[0].uuid };
+    const returnFucked = await user[0]?.uuid ;
+    return { user_uuid: returnFucked };
 }
 
 export async function favouritesSummary() {
