@@ -52,7 +52,7 @@ async function topUserArtists(spotifyToken: string) {
     }
 }
 
-export async function submitScan(attendee_uuid: string, venue_uuid: string, spotify_token: string, current_time: string) {
+export async function submitScan(venue_uuid: string, spotify_token: string) {
     const [user, venue, topArtists, currentGig] = await Promise.all(
         [
             getAttendeeByID(attendee_uuid),
