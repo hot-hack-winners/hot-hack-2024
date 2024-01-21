@@ -8,11 +8,12 @@ import useFollowPlaylist from '../auth/useFollowPlaylist'
 
 
 //import {submitScan} from '@/server/favourites'
+import {addAttendeeIfNotExists} from '@/server/attendees'
 
 interface ScanDashboardProps {
   playlistId: string
 }
-export function ScanDashboard({ playlistId }: ScanDashboardProps) {
+export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
   const [isPressed, setIsPressed] =  useState(false)
   const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId);
   const router = useRouter()
@@ -25,17 +26,29 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
       const savedUrl =   sessionStorage.getItem('preAuthUrl');
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
-    if (!loggedOut){
+    if (!loggedOut && user){
+      
 
-      //const tokenSet = localStorage.getItem('tokenSet');
-      //const token = JSON.parse(tokenSet)
+      const tokenSet = localStorage.getItem('tokenSet');
+      const token = JSON.parse(tokenSet)
       // Assuming the user object has the necessary properties
+      //console.log(token)
+      const attendee_uuid = "1"; 
+      const venue_uuid = venueuid; 
+      const spotify_token = token.access_token; 
+      const current_time = new Date().toISOString(); 
+      
+      const newAttendee = {
+        // Assuming 'uuid' and 'spotify_id' are optional
+        name: user.display_name,              // Replace with actual attendee name
+        email: 'fake@fake.com',  
+         spotify_id: user.id
+    };
 
-      const attendee_uuid = user.id; // Replace with the actual property from user object
-      const venue_uuid = 'venue_uuid_here'; 
-      const spotify_token = user.spotify_token; 
-      const current_time = new Date().toISOString(); /
-
+        // Attempt to add the new attendee
+        const result = addAttendeeIfNotExists(newAttendee);
+        console.log('Result:', result);
+      
      /* submitScan(attendee_uuid, venue_uuid, spotify_token, current_time)
         .then(topArtists => {
           console.log('Scan submitted successfully. Top Artists:', topArtists);
@@ -48,7 +61,7 @@ export function ScanDashboard({ playlistId }: ScanDashboardProps) {
   
     
     
-  }, [loggedOut, mutate])
+  }, [loggedOut, user, mutate])
 
 
 
