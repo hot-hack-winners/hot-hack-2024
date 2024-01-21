@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { authenticate, checkCookie} from "@/auth/admin-auth";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 
@@ -25,18 +26,22 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  console.log("Soething")
     const router = useRouter();
+    
     const initFunction = async () => {
-        const test = await checkCookie().then((response => 
+        checkCookie().then((response => 
             {
                 console.log(response)
                 if (response) {
-                    router.push("/test")
+                    router.push("/dashboard")
                 }
             }
             ))
     }
-    initFunction();
+    useEffect(() =>{
+      initFunction();
+   },[])
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
