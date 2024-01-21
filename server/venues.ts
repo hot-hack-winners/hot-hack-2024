@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 const venueSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         organisations_uuid: z.string(),
         name: z.string(),
         address: z.string(),
@@ -21,14 +21,14 @@ export async function getAllVenues() {
 }
 
 export async function getVenueByID(venueId: string) {
-    const data = await executeQuery<Venue>(
+    const data = await executeQuery<Venue[]>(
         'SELECT * FROM venues where uuid = ?;',
         [venueId]
     )
     return data
 }
 
-export async function addVenue(venue: Venue) {
+export async function addVenue(venue: Saveable<Venue>) {
     return await executeQuery(
         'INSERT INTO venues (uuid, organisations_uuid, name, address) VALUES(uuid(), ?, ?, ?)',
         [venue.organisations_uuid, venue.name, venue.address]

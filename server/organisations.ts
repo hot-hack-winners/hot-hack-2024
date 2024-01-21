@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 const organisationSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         name: z.string(),
         ABN: z.string(),
     }
@@ -26,7 +26,7 @@ export async function getOrganisationByID(organisationId: string) {
     )
 }
 
-export async function addOrgnisation(organisation: Organisation) {
+export async function addOrgnisation(organisation: Saveable<Organisation>) {
     return await executeQuery(
         'INSERT INTO organisations (uuid, name, ABN) VALUES(uuid(), ?, ?)',
         [organisation.name, organisation.ABN]

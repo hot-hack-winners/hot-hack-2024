@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 const adminSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         organisations_uuid: z.string(),
         name: z.string(),
         email: z.string(),
@@ -30,7 +30,7 @@ export async function getAdminByID(adminId: string) {
     return data
 }
 
-export async function registerAdmin(adminUser: Admin) {
+export async function registerAdmin(adminUser: Saveable<Admin>) {
     const saltRounds: number = 10;
     bcrypt.genSalt(saltRounds, async function (err, salt) {
         bcrypt.hash(adminUser.password, salt, async function (err, hash) {

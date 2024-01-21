@@ -4,9 +4,10 @@ import { z } from 'zod';
 
 const artistSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         spotify_id: z.string().optional(),
         name: z.string(),
+        popularity: z.string()
     }
 )
 
@@ -26,10 +27,18 @@ export async function getArtistByID(artistId: string) {
     )
 }
 
-export async function addArtist(artist: Artist) {
+export async function getArtistPopularity(spotifyArtistId: string) {
+    const response = await executeQuery<any>(
+        'SELECT popularity FROM artists WHERE spotify_id=?',
+        [spotifyArtistId]
+    )
+    return response[0].popularity
+}
+
+export async function addArtist(artist: Saveable<Artist>) {
     return await executeQuery(
-        'INSERT INTO artists (uuid, name, spotify_id) VALUES(uuid(), ?, ?)',
-        [artist.name, artist.spotify_id]
+        'INSERT INTO artists (uuid, name, spotify_id, popularity) VALUES(uuid(), ?, ?, ?)',
+        [artist.name, artist.spotify_id, artist.popularity]
     )
 
 }

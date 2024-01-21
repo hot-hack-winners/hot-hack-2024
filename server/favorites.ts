@@ -1,13 +1,14 @@
+'use server'
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
-import { getAttendeeByID } from "./attendees";
+import { getAttendeeByID, getAttendeeBySpotifyID } from "./attendees";
 import { getVenueByID } from "./venues";
 import { getCurrentVenueGig } from "./gigs";
-import { addArtist } from "./artists";
+import { addArtist, getArtistPopularity } from "./artists";
 import { addScan } from "./scans";
 
-const favoritesSchema = z.object(
+const  favoritesSchema = z.object(
     {
         uuid: z.string(),
         spotify_artists_id: z.string().optional(),
@@ -21,20 +22,86 @@ const favoritesSchema = z.object(
 
 export type Favorite = z.infer<typeof favoritesSchema>
 
-export function getAllAttendees() {
-    return executeQuery<Favorite[]>(
-        'SELECT * FROM favorites',
-        []
-    )
+export async function getFavoritesByVenueArtistId(venuesUuid: string, spotifyArtistId: string) {
+    const favourites = await executeQuery<Favorite[]>(
+        `SELECT * FROM favourites 
+        WHERE venues_uuid = ?
+            AND spotify_artists_id = ?`,
+        [venuesUuid, spotifyArtistId]
+    );
+    const popularity: number = await getArtistPopularity(spotifyArtistId);
+    const weight: number = 100 - Math.pow(popularity - 50, 2) / 30;
+    let score: number = 0;
+    if ('error' in favourites) {
+	console.log("error");
+    } else {
+	favourites.forEach((favourite:any) => {
+    	    score += (Date.now() - favourite.timestamp)/favourite.rank;
+    	});
+    }
+    return score * weight;
 }
 
-export function addFavorite(favorite: Saveable<Favorite>) {
-    return executeQuery(
+export async function getFavoritesByGigArtistId(gigUuid: string, spotifyArtistId: string) {
+    const favourites = await executeQuery<Favorite[]>(
+        `SELECT * FROM favourites 
+        WHERE gigs_uuid = ?
+            AND spotify_artists_id = ?`,
+        [gigUuid, spotifyArtistId]
+    );
+    const popularity: number = await getArtistPopularity(spotifyArtistId);
+    const weight: number = 100 - Math.pow(popularity - 50, 2) / 30;
+    let score: number = 0;
+    if ('error' in favourites) {
+	console.log("error");
+    } else {
+	favourites.forEach((favourite:any) => {
+    	    score += (Date.now() - favourite.timestamp)/favourite.rank;
+    	});
+    }
+    return score * weight;
+}
+
+export async function getBestArtistForVenue(venueUuid: string) {
+    const artists = await executeQuery<[]>(
+	`SELECT DISTINCT spotify_artists_id FROM favourites
+	WHERE venues_uuid = ?`,
+	[venueUuid]
+    );
+    let artistScores: {}[] = [];
+    if ('error' in artists) {
+	console.log("Error");
+    } else {
+	artists.forEach((artist) => {
+    	    artistScores.push({artist: getFavoritesByVenueArtistId(venueUuid, artist)});
+    	});
+    }
+    return artistScores;
+}
+
+export async function getBestArtistForGig(gigUuid: string) {
+    const artists = await executeQuery<[]>(
+	`SELECT DISTINCT spotify_artists_id FROM favourites
+	WHERE gigs_uuid = ?`,
+	[gigUuid]
+    );
+    let artistScores: {}[] = [];
+    if ('error' in artists) {
+	console.log("Error");
+    } else {
+	artists.forEach((artist) => {
+    	    artistScores.push({artist: getFavoritesByGigArtistId(gigUuid, artist)});
+    	});
+    }
+    return artistScores;
+}
+
+export async function  addFavorite(favorite: Saveable<Favorite>) {
+    return await executeQuery(
         'INSERT INTO favourites (uuid, spotify_artists_id, gigs_uuid, attendees_uuid, ranking, timestamp, venues_uuid) VALUES(uuid(), ?, ?, ?, ?, ?, ?)',
         [favorite.spotify_artists_id, favorite.gigs_uuid, favorite.attendees_uuid, favorite.ranking, favorite.timestamp, favorite.venues_uuid]
     )
 }
-
 
 async function topUserArtists(spotifyToken: string) {
     try {
@@ -46,21 +113,24 @@ async function topUserArtists(spotifyToken: string) {
             })
         const responseJson = await response.json()
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
+
         return items
     } catch (err) {
         console.log(err);
     }
 }
 
-export async function submitScan(attendee_uuid: string, venue_uuid: string, spotify_token: string, current_time: string) {
-    const [user, venue, topArtists, currentGig] = await Promise.all(
+export async function submitScan(spotify_user_id: string, venue_uuid: string, spotify_token: string) {
+    const current_time = new Date().toISOString();
+    console.log(current_time)
+    const [venue, topArtists, currentGig,] = await Promise.all(
         [
-            getAttendeeByID(attendee_uuid),
             getVenueByID(venue_uuid),
             topUserArtists(spotify_token),
             getCurrentVenueGig(venue_uuid, current_time)
         ]
     );
+    const user = await getAttendeeBySpotifyID(spotify_user_id)
 
     if (!currentGig) {
         console.log("NO CURRENT GIG");
@@ -71,31 +141,40 @@ export async function submitScan(attendee_uuid: string, venue_uuid: string, spot
         return Promise.reject();
     }
 
-    await addScan({ gigs_uuid: currentGig.uuid, attendees_uuid: user.uuid, timestamp: current_time, venues_uuid: venue_uuid })
+
+    const fucked = await currentGig[0]?.uuid;
+    const fucked2 = await user[0]?.uuid;
+
+    
+    const scan = {
+        gigs_uuid: fucked, attendees_uuid: fucked2, timestamp: current_time, venues_uuid: venue_uuid
+    }
+
+    await addScan(scan)
+
     // Add user favorites
     for (const artist of topArtists) {
         const favorite: Saveable<Favorite> = {
             spotify_artists_id: artist.id,
-            gigs_uuid: currentGig.uuid,
-            attendees_uuid: user.uuid,
-            ranking: artist.rank,
+            gigs_uuid: currentGig[0].uuid,
+            attendees_uuid: user[0].uuid,
+            ranking: artist.popularity,
             timestamp: current_time,
-            venues_uuid: venue.uuid,
+            venues_uuid: venue[0].uuid,
         }
         try {
-            await addArtist({ name: artist.name, spotify_id: artist.id })
+            await addArtist({ name: artist.name, spotify_id: artist.id, popularity: artist.popularity })
         } catch (error) {
             // if error occurs, continue function. Currently intended to catch duplicate entries in the artists table
             console.log(error)
         }
+
         await addFavorite(favorite)
     }
-
-    return topArtists;
+    const returnFucked = await user[0]?.uuid ;
+    return { user_uuid: returnFucked };
 }
 
-//     return executeQuery(
-//         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
-//         [attendee.spotify_id, attendee.name, attendee.email]
-//     )
-// }
+export async function favouritesSummary() {
+
+}

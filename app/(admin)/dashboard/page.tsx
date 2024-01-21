@@ -1,8 +1,6 @@
 'use client'
 
-import DarkChart from '@/components/DarkChart'
 import VenuesDashboard from '@/components/VenuesDashboard'
-import Scheduler from '@/components/ui/scheduler'
 
 import { useTheme } from "next-themes"
 
