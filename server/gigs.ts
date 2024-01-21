@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 const gigSchema = z.object(
     {
-        uuid: z.string().optional(),
+        uuid: z.string(),
         venue_uuid: z.string(),
         start_time: z.string().datetime(),
         end_time: z.string().datetime(),
@@ -44,7 +44,7 @@ export async function getGigByID(gigId: string) {
     return data
 }
 
-export async function addGig(gig: Gig) {
+export async function addGig(gig: Saveable<Gig>) {
     // Start time and End time need to be in ISO format, eg: 2024-01-19T12:00:00Z
     return await executeQuery(
         'INSERT INTO gigs (uuid, venue_uuid, start_time, end_time, spotify_playlist_id) VALUES(uuid(), ?, ?, ?, ?)',

@@ -36,7 +36,14 @@ export async function getAttendeeByID(attendeeId: string) {
     )
 }
 
-export async function addAttendee(attendee: Attendee) {
+export async function getAttendeeBySpotifyID(spotify_id: string) {
+    return await executeQuery<Attendee>(
+        'SELECT * FROM attendees where spotify_id = ?;',
+        [spotify_id]
+    )
+}
+
+export async function addAttendee(attendee: Saveable<Attendee>) {
     return await executeQuery(
         'INSERT INTO attendees (uuid, spotify_id, name, email) VALUES(uuid(), ?, ?, ?)',
         [attendee.spotify_id, attendee.name, attendee.email]

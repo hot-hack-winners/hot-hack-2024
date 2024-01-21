@@ -1,7 +1,7 @@
 import executeQuery from "@/lib/db";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
-import { getAttendeeByID } from "./attendees";
+import { getAttendeeByID, getAttendeeBySpotifyID } from "./attendees";
 import { getVenueByID } from "./venues";
 import { getCurrentVenueGig } from "./gigs";
 import { addArtist } from "./artists";
@@ -28,13 +28,13 @@ export function getAllAttendees() {
     )
 }
 
+
 export function addFavorite(favorite: Saveable<Favorite>) {
     return executeQuery(
         'INSERT INTO favourites (uuid, spotify_artists_id, gigs_uuid, attendees_uuid, ranking, timestamp, venues_uuid) VALUES(uuid(), ?, ?, ?, ?, ?, ?)',
         [favorite.spotify_artists_id, favorite.gigs_uuid, favorite.attendees_uuid, favorite.ranking, favorite.timestamp, favorite.venues_uuid]
     )
 }
-
 
 async function topUserArtists(spotifyToken: string) {
     try {
@@ -45,22 +45,25 @@ async function topUserArtists(spotifyToken: string) {
                 }
             })
         const responseJson = await response.json()
+        console.log(responseJson)
         const items = responseJson.items.map((item: any) => { return { id: item.id, name: item.name, popularity: item.popularity, genres: item.genres } })
+        // console.log(items)
         return items
     } catch (err) {
         console.log(err);
     }
 }
 
-export async function submitScan(venue_uuid: string, spotify_token: string) {
-    const [user, venue, topArtists, currentGig] = await Promise.all(
+export async function submitScan(spotify_user_id: string, venue_uuid: string, spotify_token: string) {
+    const current_time = new Date().toISOString();
+    const [venue, topArtists, currentGig,] = await Promise.all(
         [
-            getAttendeeByID(attendee_uuid),
             getVenueByID(venue_uuid),
             topUserArtists(spotify_token),
             getCurrentVenueGig(venue_uuid, current_time)
         ]
     );
+    const user = await getAttendeeBySpotifyID(spotify_user_id)
 
     if (!currentGig) {
         console.log("NO CURRENT GIG");
@@ -71,16 +74,20 @@ export async function submitScan(venue_uuid: string, spotify_token: string) {
         return Promise.reject();
     }
 
-    await addScan({ gigs_uuid: currentGig.uuid, attendees_uuid: user.uuid, timestamp: current_time, venues_uuid: venue_uuid })
+    const scan = {
+        gigs_uuid: currentGig[0].uuid, attendees_uuid: user[0].uuid, timestamp: current_time, venues_uuid: venue_uuid
+    }
+    await addScan(scan)
+
     // Add user favorites
     for (const artist of topArtists) {
         const favorite: Saveable<Favorite> = {
             spotify_artists_id: artist.id,
-            gigs_uuid: currentGig.uuid,
-            attendees_uuid: user.uuid,
-            ranking: artist.rank,
+            gigs_uuid: currentGig[0].uuid,
+            attendees_uuid: user[0].uuid,
+            ranking: artist.popularity,
             timestamp: current_time,
-            venues_uuid: venue.uuid,
+            venues_uuid: venue[0].uuid,
         }
         try {
             await addArtist({ name: artist.name, spotify_id: artist.id })
@@ -88,6 +95,7 @@ export async function submitScan(venue_uuid: string, spotify_token: string) {
             // if error occurs, continue function. Currently intended to catch duplicate entries in the artists table
             console.log(error)
         }
+
         await addFavorite(favorite)
     }
 
