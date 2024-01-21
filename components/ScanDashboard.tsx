@@ -11,29 +11,29 @@ import {addAttendeeIfNotExists} from '@/server/attendees'
 import {submitScan} from '@/server/favorites'
 
 interface ScanDashboardProps {
-  playlistId: string
+  playlistId: string;
+  venueUuid: string;
 }
-export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
+export function ScanDashboard({ playlistId, venueUuid }: ScanDashboardProps) {
   const [isPressed, setIsPressed] =  useState(false)
   const { follow, data, isFollowing, error } = useFollowPlaylist(playlistId);
   const router = useRouter()
   const { user, loggedOut, mutate } = useUser()
   const { topArtists, isLoading, isError } = useTopArtists()
-  
+
 
 
   const handleScans = async () => {
-
     const tokenSet = localStorage.getItem('tokenSet');
-    const token = JSON.parse(tokenSet)
 
-      // Define newAttendee and newScan objects here...
+    const token = JSON.parse(tokenSet!)
 
-        // Now for the scan
-        const scanResult = await submitScan(user.id, venueuid, token.access_token);
-        console.log('Scan Result:', scanResult);
-    }
-  
+    // Define newAttendee and newScan objects here...
+
+    // Now for the scan
+    const scanResult = await submitScan(user.id, venueUuid, token.access_token);
+    console.log('Scan Result:', scanResult);
+  }
 
   useEffect(() => {
     if (loggedOut) {
@@ -42,14 +42,14 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
       mutate(null, false).then(() => router.replace('/userlogin'))
     }
     if (!loggedOut && user){
-      
+
 
 
       const newAttendee = {
         // Assuming 'uuid' and 'spotify_id' are optional
         name: user.display_name,              // Replace with actual attendee name
-        email: 'fake@fake.com',  
-         spotify_id: user.id
+        email: 'fake@fake.com',
+        spotify_id: user.id
     };
         // Attempt to add the new attendee
         const result = addAttendeeIfNotExists(newAttendee);
@@ -57,13 +57,7 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
 
         handleScans();
         // submitscan stuff
-        const tokenSet = localStorage.getItem('tokenSet');
-        const token = JSON.parse(tokenSet)
-        const attendee_uuid = "1"; 
-        const venue_uuid = venueuid; 
-        const spotify_token = token.access_token; 
-        const current_time = new Date().toISOString(); 
-  
+
      /* submitScan(attendee_uuid, venue_uuid, spotify_token, current_time)
         .then(topArtists => {
           console.log('Scan submitted successfully. Top Artists:', topArtists);
@@ -73,9 +67,9 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
         });
 */
     }
-  
-    
-    
+
+
+
   }, [loggedOut, user, mutate])
 
 
@@ -110,13 +104,12 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
             <h1 className="text-4xl">Welcome, {user.display_name}</h1>
             <p className="text-xl">Here is nostalgia waiting.</p>
             {data && <p>{data.name}</p>}
-             <img  style={{display: 'block', height: 300, width: 300,}} src={data && data.images[0].url  } ></img>
+             <img style={{display: 'block', height: 300, width: 300,}} src={data && data.images[0].url}></img>
             <button onClick={handleFollowClick}
               className="px-4 py-2 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-white font-bold hover:opacity-75 focus:outline-none focus:shadow-outline"
-              >
-             {isPressed ? 'Followed' : "Follow"}
-
-          </button>
+            >
+              {isPressed ? 'Followed' : "Follow"}
+            </button>
 
             <button
               onClick={async () => {
@@ -126,7 +119,7 @@ export function ScanDashboard({ playlistId, venueuid }: ScanDashboardProps) {
               }}
             >
               Logout
-            </button>            
+            </button>
           </>
         )}
       </main>

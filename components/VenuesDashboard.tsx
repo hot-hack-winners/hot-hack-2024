@@ -27,15 +27,32 @@ export default function VenuesDashboard() {
   const [gigs, setGigs] = useState<Gig[]>([]);
 
   useEffect(() => {
-    getAllArtists().then((data) => {
-      setArtists(data);
-    });
-    getAllScans().then((data) => {
-      setScans(data);
-    });
-    getAllGigs().then((data) => {
-      setGigs(data);
-    });
+    getAllArtists()
+      .then((data) => {
+        if ('error' in data) {
+          console.log(data.error);
+          return;
+        }
+        setArtists(data);
+      });
+
+    getAllScans()
+      .then((data) => {
+        if ('error' in data) {
+          console.log(data.error);
+          return;
+        }
+        setScans(data);
+      });
+
+    getAllGigs()
+      .then((data) => {
+        if ('error' in data) {
+          console.log(data.error);
+          return;
+        }
+        setGigs(data);
+      });
   }, []);
 
   return (
@@ -57,7 +74,7 @@ export default function VenuesDashboard() {
                 </Card>
             ))}
           </div>
-          
+
           <div className=" basis-1/4 px-4 py-8 max-h-full rounded-md border border-gray-800 ">
             {scans.map((scan) => (
               <Card key={scan.uuid}>
@@ -70,7 +87,7 @@ export default function VenuesDashboard() {
             {gigs.map((gig) => (
 
                 <GigCard key={gig.uuid} uuid={gig.venue_uuid}></GigCard>
-     
+
             ))}
           </div>
           <div className=" basis-1/4 px-4 py-8 flex flex-col rounded-md border border-gray-800">
